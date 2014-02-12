@@ -1,6 +1,7 @@
 package fullapp;
 
 import org.apache.commons.io.*;
+import org.json.simple.parser.ParseException;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -59,8 +60,10 @@ public class TeamProfileWindow extends JFrame {
 			int row = _matchRecordTable.getSelectedRow();
 			_matchRecordTableModel.remove(row);
 			try{updateTeamSummary();}
-			catch(IOException ex){}
-			_currentEvent.saveToFile();
+			catch(IOException | ParseException ex){}
+			try {
+				_currentEvent.saveToFile();
+			} catch (IOException e1) {}
 		}
 	}
 
@@ -112,7 +115,12 @@ public class TeamProfileWindow extends JFrame {
 		_matchRecordTable.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 2) {
-					openEditMatchRecordDialog();
+					try {
+						openEditMatchRecordDialog();
+					} catch (IOException | ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			}
 		});
@@ -169,9 +177,20 @@ public class TeamProfileWindow extends JFrame {
 		_addButton.setEnabled(true);
 		_addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				openAddMatchRecordDialog();
+				try {
+					openAddMatchRecordDialog();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				try{updateTeamSummary();}
-				catch(IOException ex){}
+				catch(IOException ex){} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		
@@ -179,7 +198,12 @@ public class TeamProfileWindow extends JFrame {
 		_viewEditButton.setEnabled(false);
 		_viewEditButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				openEditMatchRecordDialog();
+				try {
+					openEditMatchRecordDialog();
+				} catch (IOException | ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		
@@ -278,22 +302,15 @@ public class TeamProfileWindow extends JFrame {
 		setTitle("Team " + _team.getNumber() + ": " + _team.getName());
 	}
 	
-	private void openAddMatchRecordDialog() {
-		MatchRecordDialog dialog = new MatchRecordDialog(TeamProfileWindow.this);
+	private void openAddMatchRecordDialog() throws IOException, ParseException {
+		MatchRecordDialog dialog = new MatchRecordDialog(_currentEvent);
 		dialog.pack();
 		dialog.setVisible(true);
-		
-		MatchRecord record = dialog.getMatchRecord();
-		if (record != null) {
-			_matchRecordTableModel.add(record);
-			updateTeamSummary();
-			_currentEvent.saveToFile();
-		}
 	}
 	
-	private void openEditMatchRecordDialog() {
+	private void openEditMatchRecordDialog() throws IOException, ParseException {
 		int row = _matchRecordTable.getSelectedRow();
-		MatchRecordDialog dialog = new MatchRecordDialog((MatchRecord)(_matchRecordTableModel.getValueAt(_matchRecordTable.convertRowIndexToModel(row))));
+		MatchRecordDialog dialog = new MatchRecordDialog((MatchRecord)(_matchRecordTableModel.getValueAt(_matchRecordTable.convertRowIndexToModel(row))),_currentEvent);
 		dialog.pack();
 		dialog.setVisible(true);
 		
@@ -307,7 +324,7 @@ public class TeamProfileWindow extends JFrame {
 		}
 	}
 	
-	private void updateTeamSummary() throws IOException {
+	private void updateTeamSummary() throws IOException, ParseException {
 		_bestMatchLabel.setText("" + _team.getBestMatchNumber() + " (" + _team.getTotalPointsScoredInMatch(_team.getBestMatchNumber()) + " pts.)");
 		_maxAutonLabel.setText("" + _team.getMaxAutonomousPoints());
 		_maxTeleopLabel.setText("" + _team.getMaxTeleoperatedPoints());

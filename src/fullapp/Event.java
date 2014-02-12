@@ -21,7 +21,7 @@ public class Event {
 	}
 
 	@SuppressWarnings("resource")
-	public Event(String name, String abbreviation, int id) throws FileNotFoundException {
+	public Event(String name, String abbreviation, int id) throws FileNotFoundException, ParseException {
 		_name = name;
 		_abbreviation = abbreviation;
 		_id = id;
@@ -31,9 +31,89 @@ public class Event {
 		
 		int teamNumber;
 		String teamName;
-
-//			teamsJson = new Scanner(ResourceLoader.load(abbreviation + "_teams.json")).useDelimiter("\\A").next();
-			teamsJson = new Scanner(new File("./src/resourceLoader/data/" + abbreviation + "_teams.json")).useDelimiter("\\A").next();
+		File eventDataFile = new File(EventOverviewWindow.pathToData + "/data/" + abbreviation + "_data.json");
+		File teamListFile = new File(EventOverviewWindow.pathToData + "/data/" + abbreviation + "_teams.json");
+		
+		if(eventDataFile.exists()){
+			teamsJson = new Scanner(eventDataFile).useDelimiter("\\A").next();
+			JSONParser parser = new JSONParser();
+			JSONArray teamArray = null;
+			try {
+				teamArray = ((JSONArray) parser.parse(teamsJson));//.get("data");
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			for (int i = 0; i < teamArray.size(); i++) {
+				JSONObject teamObject = (JSONObject)(teamArray.get(i));
+				teamName = (String) (teamObject.get("name"));
+				teamNumber = Integer.parseInt("" + teamObject.get("number"));
+				_teamList.add(new Team(teamNumber,teamName));
+				JSONArray matchRecordsArray = (JSONArray) teamObject.get("matchRecords");
+				for( int j = 0; j < matchRecordsArray.size(); j++ ){
+					JSONObject matchObj = (JSONObject) matchRecordsArray.get(j);
+					
+					int teamNumber2 = Integer.parseInt("" + matchObj.get("teamNumber"));
+					String teamName2 = ("" + matchObj.get("teamName"));
+					String eventAbbreviation = ("" + matchObj.get("eventAbbreviation"));
+					int matchNumber  = Integer.parseInt("" + matchObj.get("matchNumber"));
+					String scoutName = ("" + matchObj.get("scoutName"));
+					
+					int autoTopScoredNotHot = Integer.parseInt("" + matchObj.get("autoTopScoredNotHot"));
+					int autoTopShotNotHot = Integer.parseInt("" + matchObj.get("autoTopShotNotHot"));
+					int autoBottomScoredNotHot = Integer.parseInt("" + matchObj.get("autoBottomScoredNotHot"));
+					int autoBottomShotNotHot = Integer.parseInt("" + matchObj.get("autoBottomShotNotHot"));
+					int hotGoalTopScored = Integer.parseInt("" + matchObj.get("hotGoalTopScored"));
+					int hotGoalTopShot = Integer.parseInt("" + matchObj.get("hotGoalTopShot"));
+					int hotGoalBottomScored = Integer.parseInt("" + matchObj.get("hotGoalBottomScored"));
+					int hotGoalBottomShot = Integer.parseInt("" + matchObj.get("hotGoalBottomShot"));
+					boolean mobility = Boolean.parseBoolean(("" + matchObj.get("mobility")));
+					
+					boolean startingPosition = Boolean.parseBoolean(("" + matchObj.get("startingPosition")));
+					String positionPlayed = ("" + matchObj.get("positionPlayed"));
+					int speed = Integer.parseInt("" + matchObj.get("speed"));
+					int agility = Integer.parseInt("" + matchObj.get("agility"));
+					int pushingAbility = Integer.parseInt("" + matchObj.get("pushingAbility"));
+					int stability = Integer.parseInt("" + matchObj.get("stability"));
+					
+				    int ballsScoredTopTeleop = Integer.parseInt("" + matchObj.get("ballsScoredTopTeleop"));
+				    int ballsShotTopTeleop = Integer.parseInt("" + matchObj.get("ballsShotTopTeleop"));
+				    int ballsScoredBottomTeleop = Integer.parseInt("" + matchObj.get("ballsScoredBottomTeleop"));
+				    int ballsShotBottomTeleop = Integer.parseInt("" + matchObj.get("ballsShotBottomTeleop"));
+				    int shooterSpeed = Integer.parseInt("" + matchObj.get("shooterSpeed"));
+				    int pickUpSpeed = Integer.parseInt("" + matchObj.get("pickUpSpeed"));
+					
+				    int possessions = Integer.parseInt("" + matchObj.get("possessions"));
+				    int successfulPasses = Integer.parseInt("" + matchObj.get("successfulPasses"));
+				    int totalPasses = Integer.parseInt("" + matchObj.get("totalPasses"));
+				    int successfulTrussThrows = Integer.parseInt("" + matchObj.get("successfulTrussThrows"));
+				    int totalTrussThrows = Integer.parseInt("" + matchObj.get("totalTrussThrows"));
+				    int successfulCatches = Integer.parseInt("" + matchObj.get("successfulCatches"));
+				    int totalCatches = Integer.parseInt("" + matchObj.get("totalCatches"));				    
+					
+				    String autoComment = ("" + matchObj.get("autoComment"));
+				    String penaltyComment = ("" + matchObj.get("penaltyComment"));
+				    String interestingStrategyComment = ("" + matchObj.get("interesintgStrategyComment"));
+				    String robotFlaws = ("" + matchObj.get("robotFlaws"));    
+			
+					_teamList.get(j).addMatchRecord(new MatchRecord(teamNumber2,teamName2,eventAbbreviation,matchNumber,
+					scoutName,autoTopScoredNotHot,autoTopShotNotHot,
+					autoBottomScoredNotHot,autoBottomShotNotHot,hotGoalTopScored,
+					hotGoalTopShot,hotGoalBottomScored,hotGoalBottomShot,
+					mobility,positionPlayed,startingPosition,speed,agility,
+					pushingAbility,stability,ballsScoredTopTeleop,
+					ballsShotTopTeleop,ballsScoredBottomTeleop,
+					ballsShotBottomTeleop,shooterSpeed,pickUpSpeed,
+					possessions,successfulPasses,totalPasses,
+					successfulTrussThrows,totalTrussThrows,
+					successfulCatches,totalCatches,autoComment,
+					penaltyComment,interestingStrategyComment,
+					robotFlaws));
+					}
+				}
+			}
+		else{
+			teamsJson = new Scanner(teamListFile).useDelimiter("\\A").next();
 			JSONParser parser = new JSONParser();
 			JSONArray teamArray = null;
 			try {
@@ -43,13 +123,15 @@ public class Event {
 			}
 			
 			for (int i = 0; i < teamArray.size(); i++) {
-				JSONObject eventObject = (JSONObject)(teamArray.get(i));
-				teamName = (String)(eventObject.get("name"));
-				teamNumber = Integer.parseInt((String)(eventObject.get("number")));
-				_teamList.add(new Team(teamNumber, teamName));
+				JSONObject teamObject = (JSONObject)(teamArray.get(i));
+				teamName = (String)(teamObject.get("name"));
+				teamNumber = Integer.parseInt((String)(teamObject.get("number")));
+				_teamList.add(new Team(teamNumber,teamName));
 			}
-		//}
+		}
 	}
+	
+	
 	
 	public String getName() {
 		return _name;
@@ -94,7 +176,10 @@ public class Event {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void saveToFile() {
+	public void saveToFile() throws IOException {
+		File dataFile = new File(EventOverviewWindow.pathToData + "/data/" + getAbbreviation() + "_data.json" );
+		if(!dataFile.exists())
+			dataFile.createNewFile();
 		JSONArray teamList = new JSONArray();
 		for (int i = 0; i < _teamList.size(); i++) {
 			Team team = _teamList.get(i);
@@ -166,7 +251,7 @@ public class Event {
 		}
 		String jsonText = out.toString();
 		try {
-			PrintWriter writer = new PrintWriter(("data/" + _abbreviation +"_data.json"));
+			PrintWriter writer = new PrintWriter(dataFile);
 			writer.println(jsonText);
 			writer.close();
 		} catch (FileNotFoundException e) {

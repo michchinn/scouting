@@ -12,7 +12,6 @@ import javax.swing.*;
  *
  * @author michael
  */
-
 public class MatchRecordDialog extends JDialog{
     
 	public static MatchRecordDialog _instance;
@@ -84,15 +83,19 @@ public class MatchRecordDialog extends JDialog{
         bodyPanel.add(bottomPanel);
         JButton submitRecord = new JButton("Submit Record");
         submitRecord.addActionListener(new ActionListener(){
-
-			public void actionPerformed(ActionEvent e) {
-				MatchRecord r = getMatchRecord();
-				try{Methods.saveMATCHToFile(r);}
-				catch(IOException ex){}
-				dispose();
-			}
-        
-        });        
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				for( int i = 0; i < Main.frame.getCurrentEvent().getTeamList().size(); i++){
+					if(Main.frame.getCurrentEvent().getTeamList().get(i).getNumber() == m_commentPanel.m_setUpPanel.getTeamNumber()){
+						Main.frame.getCurrentEvent().getTeamList().get(i).addMatchRecord(getMatchRecord());
+						try {
+							Main.frame.getCurrentEvent().saveToFile();
+						} catch (IOException e) {}
+						dispose();
+					}
+				}
+			}	
+        });
         JButton saveToFile = new JButton("Save to File");
         saveToFile.addActionListener(new ActionListener(){
 
@@ -173,7 +176,14 @@ public class MatchRecordDialog extends JDialog{
 
 			public void actionPerformed(ActionEvent e) {	
 				MatchRecord r = getMatchRecord();
-				try{Methods.saveMATCHToFile(r);}
+				for( int i = 0; i < Main.frame.getCurrentEvent().getTeamList().size(); i++ )
+					if(Main.frame.getCurrentEvent().getTeamList().get(i).getNumber() == m_commentPanel.m_setUpPanel.getTeamNumber() ){
+						Main.frame.getCurrentEvent().getTeamList().get(i).addMatchRecord(r);
+						break;
+					}
+						
+				
+				try{Main.frame.getCurrentEvent().saveToFile();}
 				catch(IOException ex){}
 				dispose();
 			}

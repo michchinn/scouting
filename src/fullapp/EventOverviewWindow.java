@@ -1,18 +1,44 @@
 package fullapp;
 
-import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
 
-import org.json.simple.*;
-import org.json.simple.parser.*;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.DefaultListSelectionModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-import resourceLoader.ResourceLoader;
-
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-import java.util.*;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 @SuppressWarnings("serial")
 public class EventOverviewWindow extends JFrame {
@@ -25,7 +51,7 @@ public class EventOverviewWindow extends JFrame {
 	private EventTableModel _eventTableModel;
 	private JTable _eventTable;
 	
-	private JComboBox _eventComboBox;
+	private JComboBox<String> _eventComboBox;
 	private ArrayList<Event> _eventList;
 	
 	private JLabel _avgPointsPerMatchLabel;
@@ -49,10 +75,6 @@ public class EventOverviewWindow extends JFrame {
 			}
 			_eventTableModel.setTeamList(_currentEvent.getTeamList());
 			
-			if (_eventComboBox.getSelectedIndex() != 0) {
-				_addRecordButton.setEnabled(true);
-				_predictButton.setEnabled(true);
-			}
 			updateEventSummary();
 	
 		}
@@ -119,7 +141,7 @@ public class EventOverviewWindow extends JFrame {
 		}
 	}
 	
-	public EventOverviewWindow() throws IOException {
+	public EventOverviewWindow() throws IOException, ParseException {
 		
 		pathToData = System.getProperty("user.home") + "/Desktop/FRCData";
 		_currentEvent = new Event();
@@ -148,8 +170,9 @@ public class EventOverviewWindow extends JFrame {
 		
 		// Load Events
 		String eventsJson = "";
-		//eventsJson = new Scanner(ResourceLoader.load("data/2013_events.json")).useDelimiter("\\A").next();
-		eventsJson = new Scanner(new File(pathToData + "/data/2013_events.json")).useDelimiter("\\A").next();
+		Scanner s = new Scanner(new File(pathToData + "/data/2013_events.json"));
+//		eventsJson = new Scanner(new File(pathToData + "/data/2013_events.json")).useDelimiter("\\A").next();
+		eventsJson = s.useDelimiter("\\A").next();
 		
 		JSONParser parser = new JSONParser();
 		JSONArray eventArray = null;
@@ -176,6 +199,8 @@ public class EventOverviewWindow extends JFrame {
 			}
 		});
 
+		s.close();
+		
 		_avgPointsPerMatchLabel = new JLabel("" + _currentEvent.getAveragePointsPerMatch());
 		_avgAutonLabel = new JLabel("" + _currentEvent.getAverageAutonomousScore());
 		_avgTeleopLabel = new JLabel("" + _currentEvent.getAverageTeleoperatedScore());
@@ -259,14 +284,21 @@ public class EventOverviewWindow extends JFrame {
 		contentPane.add(rightPanelContainer, BorderLayout.EAST);
 		contentPane.setFocusable(true);
 		
+		float[]colors = {0,0,0};
+		colors = Color.RGBtoHSB(0, 81, 126, colors);
+		contentPane.setBackground(Color.getHSBColor(colors[0],colors[1],colors[2]));
+		eventSelectionPanel.setBackground(Color.getHSBColor(colors[0],colors[1],colors[2]));
+		//eventSummaryPanel.setBackground(Color.getHSBColor(colors[0],colors[1],colors[2]));
+		
 		setTitle("Aerial Assist Scoutr");
 	}
 	
 	/**
 	 * @return {JFrame} The instance of the active EventOverviewWindow.
 	 * @throws IOException 
+	 * @throws ParseException 
 	 */
-	public static EventOverviewWindow getInstance() throws IOException {
+	public static EventOverviewWindow getInstance() throws IOException, ParseException {
 		if (_instance == null) {
 			_instance = new EventOverviewWindow();
 		}

@@ -39,6 +39,8 @@ public class EventOverviewWindow extends JFrame {
 	JPanel logoPanel;
 	private Image ultAscent;
 	
+	public static String pathToData;
+	
 	class EventComboBoxListener implements ItemListener {
 		public void itemStateChanged(ItemEvent e) {
 			_eventTable.clearSelection();
@@ -68,7 +70,7 @@ public class EventOverviewWindow extends JFrame {
 				String fileExtension = pictureExists((Integer.toString(_currentTeam.getNumber())));
 
 				if( !fileExtension.equals("false") ){
-					ImageIcon icon = new ImageIcon("/Users/michael/Desktop/imagesFRC/" + Integer.toString(_currentTeam.getNumber()) + fileExtension);
+					ImageIcon icon = new ImageIcon(pathToData + "/images/teams/" + Integer.toString(_currentTeam.getNumber()) + fileExtension);
 					Image image = icon.getImage();
 					image = image.getScaledInstance(250, -1, Image.SCALE_SMOOTH);
 					ultimateAscentLogo = new JLabel(new ImageIcon(image));
@@ -119,6 +121,7 @@ public class EventOverviewWindow extends JFrame {
 	
 	public EventOverviewWindow() throws IOException {
 		
+		pathToData = System.getProperty("user.home") + "/Desktop/FRCData";
 		_currentEvent = new Event();
 		
 		_eventTableModel = new EventTableModel();
@@ -146,8 +149,7 @@ public class EventOverviewWindow extends JFrame {
 		// Load Events
 		String eventsJson = "";
 		//eventsJson = new Scanner(ResourceLoader.load("data/2013_events.json")).useDelimiter("\\A").next();
-		eventsJson = new Scanner(new File("./src/resourceLoader/data/2013_events.json")).useDelimiter("\\A").next();
-		System.out.println(eventsJson);
+		eventsJson = new Scanner(new File(pathToData + "/data/2013_events.json")).useDelimiter("\\A").next();
 		
 		JSONParser parser = new JSONParser();
 		JSONArray eventArray = null;
@@ -192,7 +194,7 @@ public class EventOverviewWindow extends JFrame {
 		ArrayList<String> eventNames = new ArrayList();
 		for( int i = 0; i < _eventList.size(); i++ ){
 			eventNames.add(_eventList.get(i).getName());
-			System.out.println(_eventList.get(i).getName());
+			
 		}
 		_eventComboBox = new JComboBox(eventNames.toArray());
 		_eventComboBox.addItemListener(new EventComboBoxListener());
@@ -201,7 +203,7 @@ public class EventOverviewWindow extends JFrame {
 		JScrollPane eventTablePanel = new JScrollPane(_eventTable);
 		eventTablePanel.setPreferredSize(new Dimension(600, 500));
 	
-		ImageIcon icon = new ImageIcon("./src/ResourceLoader/images/UltimateAscent.jpg");
+		ImageIcon icon = new ImageIcon(pathToData + "/images/UltimateAscent.jpg");
 		ultAscent = icon.getImage();
 		ultAscent = ultAscent.getScaledInstance(250, -1, Image.SCALE_SMOOTH);
 		JLabel ultimateAscentLogo = new JLabel(new ImageIcon(ultAscent));
@@ -285,10 +287,10 @@ public class EventOverviewWindow extends JFrame {
 		_avgTeleopLabel.setText("" + _currentEvent.getAverageTeleoperatedScore());
 	}
 	public String pictureExists(String fileName){
-		String[] fileExt = {".gif",".png",".jpeg",".exif",".bmp"};
+		String[] fileExt = {".gif",".jpg",".png",".jpeg",".exif",".bmp"};
 		File a = null;
-		for(int i = 0; i < 5; i++ ){
-			a = new File("/Users/michael/Desktop/imagesFRC/" + fileName + fileExt[i]);
+		for(int i = 0; i < 6; i++ ){
+			a = new File(pathToData + "/images/teams/" + fileName + fileExt[i]);
 			if(a.exists())
 				return fileExt[i];
 		}

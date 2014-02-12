@@ -1,15 +1,15 @@
 package fullapp;
 
 import org.apache.commons.io.*;
+
 import java.awt.*;
 import java.awt.event.*;
-
 import java.io.*;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.event.*;
 
+@SuppressWarnings("serial")
 public class TeamProfileWindow extends JFrame {
 	
 	private Team _team;
@@ -70,7 +70,7 @@ public class TeamProfileWindow extends JFrame {
 			if (returnValue == JFileChooser.APPROVE_OPTION) {
 	            File file = _fileChooser.getSelectedFile();
 	            try {
-					FileUtils.copyFile(file, new File("/Users/michael/Desktop/imagesFRC/"+_team.getNumber() + "." + FilenameUtils.getExtension(file.getName())));
+					FileUtils.copyFile(file, new File("/Users/17mchinn/Desktop/FRCData/images/teams/"+_team.getNumber() + "." + FilenameUtils.getExtension(file.getName())));
 	            } catch (IOException e1) {
 					e1.printStackTrace();
 				}
@@ -126,7 +126,7 @@ public class TeamProfileWindow extends JFrame {
 		matchRecordPanelContainer.add(matchRecordPanel);
 		
 		// TODO: Search for picture or use a default image if it doesn't exist.
-		File root = new File("images/teams");
+		File root = new File(EventOverviewWindow.pathToData + "/images/teams");
 		File[] files = root.listFiles(new FileFilter() {
 			public boolean accept(File file) {
 				String filename = file.getName();
@@ -142,7 +142,7 @@ public class TeamProfileWindow extends JFrame {
 		if (files.length > 0) {
 			icon = new ImageIcon(files[0].getAbsolutePath());
 		} else {
-			icon = new ImageIcon("images/defaultProfilePicture.jpg");
+			icon = new ImageIcon(EventOverviewWindow.pathToData + "/images/defaultProfilePicture.jpg");
 		}
 		Image image = icon.getImage();
 		if (icon.getIconHeight() > icon.getIconWidth()) {

@@ -31,7 +31,6 @@ public class Event {
 		
 		int teamNumber;
 		String teamName;
-		System.out.println(abbreviation);
 
 //			teamsJson = new Scanner(ResourceLoader.load(abbreviation + "_teams.json")).useDelimiter("\\A").next();
 			teamsJson = new Scanner(new File("./src/resourceLoader/data/" + abbreviation + "_teams.json")).useDelimiter("\\A").next();

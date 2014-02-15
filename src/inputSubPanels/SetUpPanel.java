@@ -53,7 +53,8 @@ public class SetUpPanel extends JPanel {
     	return (String)name.getSelectedItem();
     }
     public int getMatchNumber(){
-    	return Integer.parseInt(matchNum.getText());
+    	try{return Integer.parseInt(matchNum.getText());}
+    	catch(NumberFormatException e){return 0;}
     }
     public String getScoutName(){
     	return scoutName.getText();
@@ -73,7 +74,7 @@ public class SetUpPanel extends JPanel {
     public void setTeamName(String teamName){
     	for( int i = 0; i < teamNums.size(); i++ )
     		if( teamName.equals(teamNames.get(i)) )
-    			num.setSelectedIndex(i);
+    			name.setSelectedIndex(i);
     	return;
     }
 }

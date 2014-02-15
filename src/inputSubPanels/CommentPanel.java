@@ -59,5 +59,14 @@ public class CommentPanel extends JPanel{
     public String getAutoNotes(){
     	return autoNotes.getText();
     }
+    public void setAutonComment(String comment){
+    	this.autoNotes.setText(comment);
+    }
+    public void setInterestingStrategy(String interestingStrategy){
+    	this.interestingStrategy.setText(interestingStrategy);
+    }
+    public void setRobotFlaws(String flaws){
+    	this.robotFlaws.setText(flaws);
+    }
     
 }

@@ -13,7 +13,7 @@ public class Main {
 	
 	static EventOverviewWindow frame;
 	
-	public static void main(String[] args) throws IOException, ParseException {
+	public static void main(String[] args) throws Exception {
 		
 		// Allow the enter key to be used to press buttons.
 		InputMap im = (InputMap) UIManager.getDefaults().get("Button.focusInputMap");
@@ -24,7 +24,7 @@ public class Main {
         im.put(KeyStroke.getKeyStroke("released ENTER"), releasedAction);
         
 		frame = new EventOverviewWindow();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
 	}

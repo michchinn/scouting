@@ -11,7 +11,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 @SuppressWarnings("serial")
-public class TeamProfileWindow extends JFrame {
+public class TeamProfileWindow extends JPanel {
 	
 	private Team _team;
 	private Event _currentEvent;
@@ -60,7 +60,7 @@ public class TeamProfileWindow extends JFrame {
 			int row = _matchRecordTable.getSelectedRow();
 			_matchRecordTableModel.remove(row);
 			try{updateTeamSummary();}
-			catch(IOException | ParseException ex){}
+			catch(Exception ex){}
 			try {
 				_currentEvent.saveToFile();
 			} catch (IOException e1) {}
@@ -283,7 +283,7 @@ public class TeamProfileWindow extends JFrame {
 		closePanel.add(_closeButton);
 		
 		// Add the subpanels to the frame.
-		Container contentPane = getContentPane();
+		Container contentPane = this;
 		setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		((JPanel)contentPane).setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		
@@ -294,9 +294,7 @@ public class TeamProfileWindow extends JFrame {
 		contentPane.add(closePanel);
 		
 		contentPane.setFocusable(true);
-		setResizable(false);
 		
-		setTitle("Team " + _team.getNumber() + ": " + _team.getName());
 	}
 	
 	private void openAddMatchRecordDialog() throws IOException, ParseException {

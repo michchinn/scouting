@@ -118,7 +118,7 @@ public class EventOverviewWindow extends JDialog {
 	
 	class ViewTeamListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			TeamProfileWindow window = new TeamProfileWindow(_currentTeam, _currentEvent);
+			TabbedProfileWindow window = new TabbedProfileWindow(_currentTeam, _currentEvent);
 			window.pack();
 			window.setVisible(true);
 		}
@@ -165,7 +165,7 @@ public class EventOverviewWindow extends JDialog {
 				if (e.getClickCount() == 2) {
 					int row = _eventTable.getSelectedRow();
 					if (row != -1) {
-						TeamProfileWindow window = new TeamProfileWindow(_currentTeam, _currentEvent);
+						TabbedProfileWindow window = new TabbedProfileWindow(_currentTeam, _currentEvent);
 						window.pack();
 						window.setVisible(true);
 					}

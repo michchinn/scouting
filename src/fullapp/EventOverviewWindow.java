@@ -73,10 +73,15 @@ public class EventOverviewWindow extends JDialog {
 	
 	class EventComboBoxListener implements ItemListener {
 		public void itemStateChanged(ItemEvent e) {
+			int x = 0;
 			_eventTable.clearSelection();
 			for( int i = 0; !e.getItem().equals(_eventList.get(i).getName()); i++ ){
-				_currentEvent = (Event)_eventList.get(i);
+				x = i;
 			}
+			if( x == 0 )
+				x = _eventList.size();
+			x -= 1;
+			_currentEvent = Main.frame._eventList.get(x);
 			_eventTableModel.setTeamList(_currentEvent.getTeamList());
 			
 			updateEventSummary();
@@ -172,7 +177,6 @@ public class EventOverviewWindow extends JDialog {
 				}
 			}
 		});
-		
 		_eventList = new ArrayList<Event>();
 		
 		// Load Events
@@ -297,6 +301,8 @@ public class EventOverviewWindow extends JDialog {
 
 		setTitle("Aerial Assist Scoutr");
 	//	setResizable(false);
+		_eventTableModel.setTeamList(_eventList.get(0).getTeamList());
+		_eventTableModel.fireTableDataChanged();
 	}
 	
 	/**

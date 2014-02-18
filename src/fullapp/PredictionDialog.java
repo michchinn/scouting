@@ -108,15 +108,15 @@ public class PredictionDialog extends JDialog {
 		}
 	}
 	
-	public PredictionDialog(Frame owner) {
-		super(owner);
+	public PredictionDialog(EventOverviewWindow _instance) {
+		super(_instance);
 		
-		_red1 = new JComboBox(((EventOverviewWindow)(owner)).getCurrentEvent().getTeamList().toArray());
-		_red2 = new JComboBox(((EventOverviewWindow)(owner)).getCurrentEvent().getTeamList().toArray());
-		_red3 = new JComboBox(((EventOverviewWindow)(owner)).getCurrentEvent().getTeamList().toArray());
-		_blue1 = new JComboBox(((EventOverviewWindow)(owner)).getCurrentEvent().getTeamList().toArray());
-		_blue2 = new JComboBox(((EventOverviewWindow)(owner)).getCurrentEvent().getTeamList().toArray());
-		_blue3 = new JComboBox(((EventOverviewWindow)(owner)).getCurrentEvent().getTeamList().toArray());
+		_red1 = new JComboBox(((EventOverviewWindow)(_instance)).getCurrentEvent().getTeamList().toArray());
+		_red2 = new JComboBox(((EventOverviewWindow)(_instance)).getCurrentEvent().getTeamList().toArray());
+		_red3 = new JComboBox(((EventOverviewWindow)(_instance)).getCurrentEvent().getTeamList().toArray());
+		_blue1 = new JComboBox(((EventOverviewWindow)(_instance)).getCurrentEvent().getTeamList().toArray());
+		_blue2 = new JComboBox(((EventOverviewWindow)(_instance)).getCurrentEvent().getTeamList().toArray());
+		_blue3 = new JComboBox(((EventOverviewWindow)(_instance)).getCurrentEvent().getTeamList().toArray());
 		
 		_predictedRedScore = new JLabel();
 		_predictedBlueScore = new JLabel();

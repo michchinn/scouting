@@ -215,6 +215,9 @@ public class MatchRecordDialog extends JDialog{
         
         add(fullPanel);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        this.setMatch(r);
+        
         setAlwaysOnTop(true);
         setResizable(false);
         pack();
@@ -285,7 +288,28 @@ public class MatchRecordDialog extends JDialog{
     	}
     	return _instance;
     }
+    public void setMatch(MatchRecord r){
+    	
+    	setTeamNumber(r.getTeamNumber());
+    	setTeamName(r.getTeamName());
+    	setScoutName(r.getScoutName());
+    	setAutonComment(r.getAutoComment());
+    	
+    }
     public void setTeamNumber(int teamNumber){
     	m_commentPanel.m_setUpPanel.setTeamNumber(teamNumber);
     }
+    public void setTeamName(String teamName){
+    	m_commentPanel.m_setUpPanel.setTeamName(teamName);
+    }
+    public void setScoutName(String scoutName){
+    	m_commentPanel.m_setUpPanel.setScoutName(scoutName);
+    }
+    public void setMatchNumber(int matchNumber){
+    	m_commentPanel.m_setUpPanel.setMatchNumber(matchNumber);
+    }
+    public void setAutonComment(String autonComment){
+    	m_commentPanel.setAutonComment(autonComment);
+    }
 }
+

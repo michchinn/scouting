@@ -26,7 +26,7 @@ import javax.swing.DefaultListSelectionModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -41,7 +41,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 @SuppressWarnings("serial")
-public class EventOverviewWindow extends JFrame {
+public class EventOverviewWindow extends JDialog {
 	
 	private static EventOverviewWindow _instance;
 	
@@ -64,6 +64,9 @@ public class EventOverviewWindow extends JFrame {
 	JLabel ultimateAscentLogo;
 	JPanel logoPanel;
 	private Image ultAscent;
+	
+	private static float[] floats = {0,0,0};
+	private static Color daisyDarkBlue; // = Color.getHSBColor(floats[0], floats[1], floats[2]);
 	
 	public static String pathToData;
 	
@@ -141,7 +144,10 @@ public class EventOverviewWindow extends JFrame {
 		}
 	}
 	
-	public EventOverviewWindow() throws IOException, ParseException {
+	public EventOverviewWindow() throws Exception {
+		
+		floats = Color.RGBtoHSB(0, 81, 126,floats);
+		daisyDarkBlue = Color.getHSBColor(floats[0], floats[1], floats[2]);
 		
 		pathToData = System.getProperty("user.home") + "/Desktop/FRCData";
 		_currentEvent = new Event();
@@ -210,13 +216,13 @@ public class EventOverviewWindow extends JFrame {
 		_viewTeamButton.setEnabled(false);
 		_viewTeamButton.addActionListener(new ViewTeamListener());
 		_addRecordButton = new JButton("Add Record");
-		_addRecordButton.setEnabled(false);
+//		_addRecordButton.setEnabled(false);
 		_addRecordButton.addActionListener(new AddRecordListener());
 		_predictButton = new JButton("Match Prediction");
-		_predictButton.setEnabled(false);
+//		_predictButton.setEnabled(false);
 		_predictButton.addActionListener(new PredictButtonListener());
 		
-		ArrayList<String> eventNames = new ArrayList();
+		ArrayList<String> eventNames = new ArrayList<String>();
 		for( int i = 0; i < _eventList.size(); i++ ){
 			eventNames.add(_eventList.get(i).getName());
 			
@@ -286,19 +292,17 @@ public class EventOverviewWindow extends JFrame {
 		
 		float[]colors = {0,0,0};
 		colors = Color.RGBtoHSB(0, 81, 126, colors);
-		contentPane.setBackground(Color.getHSBColor(colors[0],colors[1],colors[2]));
-		eventSelectionPanel.setBackground(Color.getHSBColor(colors[0],colors[1],colors[2]));
-		//eventSummaryPanel.setBackground(Color.getHSBColor(colors[0],colors[1],colors[2]));
-		
+		contentPane.setBackground(daisyDarkBlue);
+
 		setTitle("Aerial Assist Scoutr");
+	//	setResizable(false);
 	}
 	
 	/**
 	 * @return {JFrame} The instance of the active EventOverviewWindow.
-	 * @throws IOException 
-	 * @throws ParseException 
+	 * @throws Exception 
 	 */
-	public static EventOverviewWindow getInstance() throws IOException, ParseException {
+	public static EventOverviewWindow getInstance() throws Exception {
 		if (_instance == null) {
 			_instance = new EventOverviewWindow();
 		}

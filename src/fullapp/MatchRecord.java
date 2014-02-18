@@ -395,9 +395,10 @@ public class MatchRecord{
 	}
 	public double getTeleopShootingPercentage(){
 		double avg = 0.0;
-		
-		avg += (this.getBallsScoredTopTeleop() + this.getBallsScoredTopTeleop())/(this.getBallsShotBottomTeleop()+ this.getBallsShotTopTeleop());
-		
+		try{
+			avg += (this.getBallsScoredTopTeleop() + this.getBallsScoredTopTeleop())/(this.getBallsShotBottomTeleop() + this.getBallsShotTopTeleop());
+		}
+		catch(ArithmeticException e){}
 		return avg;
 	}
 }

@@ -308,7 +308,7 @@ public class TeamProfileWindow extends JFrame {
 		dialog.setVisible(true);
 	}
 	
-	private void openEditMatchRecordDialog() throws IOException, ParseException {
+	private void openEditMatchRecordDialog() throws Exception {
 		int row = _matchRecordTable.getSelectedRow();
 		MatchRecordDialog dialog = new MatchRecordDialog((MatchRecord)(_matchRecordTableModel.getValueAt(_matchRecordTable.convertRowIndexToModel(row))),_currentEvent);
 		dialog.pack();
@@ -324,7 +324,7 @@ public class TeamProfileWindow extends JFrame {
 		}
 	}
 	
-	private void updateTeamSummary() throws IOException, ParseException {
+	private void updateTeamSummary() throws Exception {
 		_bestMatchLabel.setText("" + _team.getBestMatchNumber() + " (" + _team.getTotalPointsScoredInMatch(_team.getBestMatchNumber()) + " pts.)");
 		_maxAutonLabel.setText("" + _team.getMaxAutonomousPoints());
 		_maxTeleopLabel.setText("" + _team.getMaxTeleoperatedPoints());

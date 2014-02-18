@@ -187,10 +187,7 @@ public class TeamProfileWindow extends JFrame {
 					e1.printStackTrace();
 				}
 				try{updateTeamSummary();}
-				catch(IOException ex){} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				catch(Exception ex){}
 			}
 		});
 		

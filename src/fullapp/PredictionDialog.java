@@ -5,6 +5,7 @@ import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -35,13 +36,13 @@ public class PredictionDialog extends JDialog {
 	class goButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			
-			Team r1 = (Team)_red1.getSelectedItem();
-			Team r2 = (Team)_red2.getSelectedItem();
-			Team r3 = (Team)_red3.getSelectedItem();
+			Team r1 = getTeamFromIndex(_red1);
+			Team r2 = getTeamFromIndex(_red2);
+			Team r3 = getTeamFromIndex(_red3);
 			
-			Team b1 = (Team)_blue1.getSelectedItem();
-			Team b2 = (Team)_blue2.getSelectedItem();
-			Team b3 = (Team)_blue3.getSelectedItem();
+			Team b1 = getTeamFromIndex(_blue1);
+			Team b2 = getTeamFromIndex(_blue2);
+			Team b3 = getTeamFromIndex(_blue3);
 			
 			double red1 = r1.getAveragePointsPerMatch();
 			double red2 = r2.getAveragePointsPerMatch();
@@ -109,14 +110,20 @@ public class PredictionDialog extends JDialog {
 	}
 	
 	public PredictionDialog(EventOverviewWindow _instance) {
-		super(_instance);
+		super(_instance);	
 		
-		_red1 = new JComboBox(((EventOverviewWindow)(_instance)).getCurrentEvent().getTeamList().toArray());
-		_red2 = new JComboBox(((EventOverviewWindow)(_instance)).getCurrentEvent().getTeamList().toArray());
-		_red3 = new JComboBox(((EventOverviewWindow)(_instance)).getCurrentEvent().getTeamList().toArray());
-		_blue1 = new JComboBox(((EventOverviewWindow)(_instance)).getCurrentEvent().getTeamList().toArray());
-		_blue2 = new JComboBox(((EventOverviewWindow)(_instance)).getCurrentEvent().getTeamList().toArray());
-		_blue3 = new JComboBox(((EventOverviewWindow)(_instance)).getCurrentEvent().getTeamList().toArray());
+		ArrayList<Integer> teamNums = new ArrayList();
+		
+		for( int i = 0; i < Main.frame.getCurrentEvent().getTeamList().size(); i++ ){
+			teamNums.add(Main.frame.getCurrentEvent().getTeamList().get(i).getNumber());
+		}
+		
+		_red1 = new JComboBox(teamNums.toArray());
+		_red2 = new JComboBox(teamNums.toArray());
+		_red3 = new JComboBox(teamNums.toArray());
+		_blue1 = new JComboBox(teamNums.toArray());
+		_blue2 = new JComboBox(teamNums.toArray());
+		_blue3 = new JComboBox(teamNums.toArray());
 		
 		_predictedRedScore = new JLabel();
 		_predictedBlueScore = new JLabel();
@@ -189,5 +196,13 @@ public class PredictionDialog extends JDialog {
 
 		setTitle("Match Prediction");
 		setResizable(false);
+	}
+	private Team getTeamFromIndex(JComboBox jcb){
+		int selected = jcb.getSelectedIndex();
+		for( int i = 0; i < Main.frame.getCurrentEvent().getTeamList().size(); i++ ){
+			if( Main.frame.getCurrentEvent().getTeamList().get(i).getNumber() == (Integer)jcb.getSelectedItem() )
+				return Main.frame.getCurrentEvent().getTeamList().get(i);
+		}
+		return null;
 	}
 }

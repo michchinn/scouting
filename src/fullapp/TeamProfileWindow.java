@@ -1,7 +1,7 @@
 package fullapp;
 
 import org.apache.commons.io.*;
-import org.json.simple.parser.ParseException;
+import org.json.simple.parser.*;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -117,7 +117,7 @@ public class TeamProfileWindow extends JPanel {
 				if (e.getClickCount() == 2) {
 					try {
 						openEditMatchRecordDialog();
-					} catch (IOException | ParseException e1) {
+					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -197,7 +197,7 @@ public class TeamProfileWindow extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					openEditMatchRecordDialog();
-				} catch (IOException | ParseException e1) {
+				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}

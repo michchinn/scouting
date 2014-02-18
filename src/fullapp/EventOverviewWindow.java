@@ -62,9 +62,9 @@ public class EventOverviewWindow extends JDialog {
 	private JButton _viewTeamButton;
 	private JButton _addRecordButton;
 	private JButton _predictButton;
-	JLabel ultimateAscentLogo;
+	JLabel aerialAssistLogo;
 	JPanel logoPanel;
-	private Image ultAscent;
+	private Image aerAssist;
 	
 	private static float[] floats = {0,0,0};
 	private static Color daisyDarkBlue; // = Color.getHSBColor(floats[0], floats[1], floats[2]);
@@ -99,16 +99,16 @@ public class EventOverviewWindow extends JDialog {
 					ImageIcon icon = new ImageIcon(pathToData + "/images/teams/" + Integer.toString(_currentTeam.getNumber()) + fileExtension);
 					Image image = icon.getImage();
 					image = image.getScaledInstance(250, -1, Image.SCALE_SMOOTH);
-					ultimateAscentLogo = new JLabel(new ImageIcon(image));
+					aerialAssistLogo = new JLabel(new ImageIcon(image));
 					logoPanel.remove(0);
-					logoPanel.add(ultimateAscentLogo);
+					logoPanel.add(aerialAssistLogo);
 					logoPanel.repaint();
 					logoPanel.revalidate();
 				}
 				else{
-					ultimateAscentLogo = new JLabel(new ImageIcon(ultAscent));
+					aerialAssistLogo = new JLabel(new ImageIcon(aerAssist));
 					logoPanel.remove(0);
-					logoPanel.add(ultimateAscentLogo);
+					logoPanel.add(aerialAssistLogo);
 					logoPanel.repaint();
 					logoPanel.revalidate();
 				}
@@ -235,10 +235,10 @@ public class EventOverviewWindow extends JDialog {
 		JScrollPane eventTablePanel = new JScrollPane(_eventTable);
 		eventTablePanel.setPreferredSize(new Dimension(600, 500));
 	
-		ImageIcon icon = new ImageIcon(pathToData + "/images/UltimateAscent.jpg");
-		ultAscent = icon.getImage();
-		ultAscent = ultAscent.getScaledInstance(250, -1, Image.SCALE_SMOOTH);
-		JLabel ultimateAscentLogo = new JLabel(new ImageIcon(ultAscent));
+		ImageIcon icon = new ImageIcon(pathToData + "/images/AerialAssist.png");
+		aerAssist = icon.getImage();
+		aerAssist = aerAssist.getScaledInstance(250, -1, Image.SCALE_SMOOTH);
+		JLabel aerialAssistLogo = new JLabel(new ImageIcon(aerAssist));
 		
 		JPanel eventSelectionPanel = new JPanel();
 		eventSelectionPanel.add(_eventComboBox);
@@ -262,7 +262,7 @@ public class EventOverviewWindow extends JDialog {
 		eventDetailPanel.add(eventSummaryPanel);
 		
 		logoPanel = new JPanel();
-		logoPanel.add(ultimateAscentLogo);
+		logoPanel.add(aerialAssistLogo);
 		
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.add(_viewTeamButton);
@@ -323,7 +323,7 @@ public class EventOverviewWindow extends JDialog {
 		_avgAutonLabel.setText("" + _currentEvent.getAverageAutonomousScore());
 		_avgTeleopLabel.setText("" + _currentEvent.getAverageTeleoperatedScore());
 	}
-	public String pictureExists(String fileName){
+	public static String pictureExists(String fileName){
 		String[] fileExt = {".gif",".jpg",".png",".jpeg",".exif",".bmp"};
 		File a = null;
 		for(int i = 0; i < 6; i++ ){

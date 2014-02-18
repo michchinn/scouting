@@ -5,8 +5,6 @@ import java.util.*;
 import org.json.simple.*;
 import org.json.simple.parser.*;
 
-import resourceLoader.ResourceLoader;
-
 public class Event {
 	public String _name;
 	public String _abbreviation;

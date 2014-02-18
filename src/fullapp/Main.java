@@ -23,8 +23,8 @@ public class Main {
         im.put(KeyStroke.getKeyStroke("pressed ENTER"), pressedAction);
         im.put(KeyStroke.getKeyStroke("released ENTER"), releasedAction);
         
-		try{frame = new EventOverviewWindow();}
-		catch(Exception e){e.printStackTrace();}
+		frame = new EventOverviewWindow();
+		
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);

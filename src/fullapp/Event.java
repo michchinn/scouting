@@ -19,7 +19,7 @@ public class Event {
 	}
 
 	@SuppressWarnings("resource")
-	public Event(String name, String abbreviation, int id) throws FileNotFoundException, ParseException {
+	public Event(String name, String abbreviation, int id) throws Exception{
 		_name = name;
 		_abbreviation = abbreviation;
 		_id = id;
@@ -35,12 +35,7 @@ public class Event {
 		if(eventDataFile.exists()){
 			teamsJson = new Scanner(eventDataFile).useDelimiter("\\A").next();
 			JSONParser parser = new JSONParser();
-			JSONArray teamArray = null;
-			try {
-				teamArray = ((JSONArray) parser.parse(teamsJson));//.get("data");
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+			JSONArray teamArray = ((JSONArray) parser.parse(teamsJson));//.get("data");	
 			
 			for (int i = 0; i < teamArray.size(); i++) {
 				JSONObject teamObject = (JSONObject)(teamArray.get(i));
@@ -94,7 +89,7 @@ public class Event {
 				    String interestingStrategyComment = ("" + matchObj.get("interesintgStrategyComment"));
 				    String robotFlaws = ("" + matchObj.get("robotFlaws"));    
 			
-					_teamList.get(j).addMatchRecord(new MatchRecord(teamNumber2,teamName2,eventAbbreviation,matchNumber,
+					_teamList.get(i).addMatchRecord(new MatchRecord(teamNumber2,teamName2,eventAbbreviation,matchNumber,
 					scoutName,autoTopScoredNotHot,autoTopShotNotHot,
 					autoBottomScoredNotHot,autoBottomShotNotHot,hotGoalTopScored,
 					hotGoalTopShot,hotGoalBottomScored,hotGoalBottomShot,
@@ -125,6 +120,7 @@ public class Event {
 				teamName = (String)(teamObject.get("name"));
 				teamNumber = Integer.parseInt((String)(teamObject.get("number")));
 				_teamList.add(new Team(teamNumber,teamName));
+				System.out.println(teamNumber + " " + teamName);
 			}
 		}
 	}

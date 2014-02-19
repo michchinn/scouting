@@ -131,11 +131,13 @@ public class EventOverviewWindow extends JDialog {
 	
 	class AddRecordListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			_eventTable.clearSelection();
-			_currentEvent = _eventList.get(_eventComboBox.getSelectedIndex());
+
 			
 			MatchRecordDialog dialog = null;
 			dialog = new MatchRecordDialog(_currentEvent);
+			dialog.setTeamNumber(_currentEvent.getTeamList().get(_eventTable.getSelectedRow()).getNumber());
+			dialog.setTeamName(_currentEvent.getTeamList().get(_eventTable.getSelectedRow()).getName());
+			_eventTable.clearSelection();
 			dialog.setVisible(true);
 		}
 	}
@@ -156,7 +158,7 @@ public class EventOverviewWindow extends JDialog {
 		daisyDarkBlue = Color.getHSBColor(floats[0], floats[1], floats[2]);
 		
 		pathToData = System.getProperty("user.home") + "/Desktop/FRCData";
-		_currentEvent = new Event();
+		_currentEvent = new Event("Hatboro-Horsham FIRST Robotics District Competition","PAHAT",142);
 		
 		_eventTableModel = new EventTableModel();
 		_eventTable = new JTable(_eventTableModel);
@@ -178,39 +180,39 @@ public class EventOverviewWindow extends JDialog {
 			}
 		});
 		_eventList = new ArrayList<Event>();
-		
+
 		// Load Events
-		String eventsJson = "";
-		Scanner s = new Scanner(new File(pathToData + "/data/2013_events.json"));
+//		String eventsJson = "";
+//		Scanner s = new Scanner(new File(pathToData + "/data/2013_events.json"));
 //		eventsJson = new Scanner(new File(pathToData + "/data/2013_events.json")).useDelimiter("\\A").next();
-		eventsJson = s.useDelimiter("\\A").next();
+//		eventsJson = s.useDelimiter("\\A").next();
 		
-		JSONParser parser = new JSONParser();
-		JSONArray eventArray = null;
-		try {
-			eventArray = (JSONArray)((JSONObject)(parser.parse(eventsJson))).get("data");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+//		JSONParser parser = new JSONParser();
+//		JSONArray eventArray = null;
+//		try {
+//			eventArray = (JSONArray)((JSONObject)(parser.parse(eventsJson))).get("data");
+//		} catch (ParseException e) {
+//		e.printStackTrace();
+//		}
 
-		for (int i = 0; i < eventArray.size(); i++) {
-			JSONObject eventObject = (JSONObject)(eventArray.get(i));
-			String name = (String)(eventObject.get("name"));
-			String abbreviation = (String)(eventObject.get("api_name"));
-			int id = Integer.parseInt((String)(eventObject.get("id")));
-			Event event = new Event(name, abbreviation, id);
-			if (event.getTeamList().size() > 0) {
-				_eventList.add(event);
-			}
-		}
-		
-		Collections.sort(_eventList, new Comparator<Event>() {
-			public int compare(Event e1, Event e2) {
-				return e1.getName().compareTo(e2.getName());
-			}
-		});
+//		for (int i = 0; i < eventArray.size(); i++) {
+//			JSONObject eventObject = (JSONObject)(eventArray.get(i));
+//			String name = (String)(eventObject.get("name"));
+//			String abbreviation = (String)(eventObject.get("api_name"));
+//			int id = Integer.parseInt((String)(eventObject.get("id")));
+//			Event event = new Event(name, abbreviation, id);
+//			if (event.getTeamList().size() > 0) {
+//				_eventList.add(event);
+//			}
+//		}
+//		
+//		Collections.sort(_eventList, new Comparator<Event>() {
+//			public int compare(Event e1, Event e2) {
+//				return e1.getName().compareTo(e2.getName());
+//			}
+//		});
 
-		s.close();
+//		s.close();
 		
 		_avgPointsPerMatchLabel = new JLabel("" + _currentEvent.getAveragePointsPerMatch());
 		_avgAutonLabel = new JLabel("" + _currentEvent.getAverageAutonomousScore());
@@ -232,8 +234,8 @@ public class EventOverviewWindow extends JDialog {
 			eventNames.add(_eventList.get(i).getName());
 			
 		}
-		_eventComboBox = new JComboBox(eventNames.toArray());
-		_eventComboBox.addItemListener(new EventComboBoxListener());
+//		_eventComboBox = new JComboBox(eventNames.toArray());
+//		_eventComboBox.addItemListener(new EventComboBoxListener());
 		
 		// Construct panels for the right side controls.
 		JScrollPane eventTablePanel = new JScrollPane(_eventTable);
@@ -244,8 +246,8 @@ public class EventOverviewWindow extends JDialog {
 		aerAssist = aerAssist.getScaledInstance(250, -1, Image.SCALE_SMOOTH);
 		JLabel aerialAssistLogo = new JLabel(new ImageIcon(aerAssist));
 		
-		JPanel eventSelectionPanel = new JPanel();
-		eventSelectionPanel.add(_eventComboBox);
+	//	JPanel eventSelectionPanel = new JPanel();
+//		eventSelectionPanel.add(_eventComboBox);
 		
 		JLabel eventSummaryLabel = new JLabel("Event Summary");
 		eventSummaryLabel.setFont(new Font(eventSummaryLabel.getFont().getName(),Font.BOLD,eventSummaryLabel.getFont().getSize()));
@@ -278,7 +280,7 @@ public class EventOverviewWindow extends JDialog {
 		JPanel rightPanel = new JPanel();
 		rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
 		rightPanel.add(logoPanel);
-		rightPanel.add(eventSelectionPanel);
+//		rightPanel.add(eventSelectionPanel);
 		rightPanel.add(eventDetailPanel);
 		rightPanel.add(buttonPanel);
 		rightPanel.add(buttonPanel2);
@@ -301,7 +303,7 @@ public class EventOverviewWindow extends JDialog {
 
 		setTitle("Aerial Assist Scoutr");
 	//	setResizable(false);
-		_eventTableModel.setTeamList(_eventList.get(0).getTeamList());
+		_eventTableModel.setTeamList(_currentEvent.getTeamList());
 		_eventTableModel.fireTableDataChanged();
 	}
 	

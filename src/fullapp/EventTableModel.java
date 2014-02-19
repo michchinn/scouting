@@ -48,8 +48,8 @@ public class EventTableModel extends AbstractTableModel{
 	 * @return The item in a specified cell of the table.
 	 */
 	public Object getValueAt(int row, int col) {	
-		//String currentEventAbbr = EventOverviewWindow.getInstance().getCurrentEvent().getAbbreviation();	
 		Team team = _data.get(row);
+		System.out.println(team.getNumber() + " " + row);
 		switch(col) {
 			case 0: return team.getNumber();
 			case 1: return team.getAveragePointsPerMatch();

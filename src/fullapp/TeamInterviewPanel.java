@@ -8,6 +8,8 @@ import static fullapp.EventOverviewWindow.*;
 
 public class TeamInterviewPanel extends JPanel {
 
+	private Interview _interview;
+	
 	private PhotoPanel m_photoPanel;
 	private IAutonPanel m_autonPanel;
 	private JPanel drivePanel;
@@ -52,8 +54,13 @@ class PhotoPanel extends JPanel{
 			imgLabel.setIcon(new ImageIcon(img));
 		}
 		add(imgLabel);
+		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 	}
 }
 class IAutonPanel extends JPanel{
+	
+	public IAutonPanel(Interview i){
+		
+	}
 	
 }

@@ -15,7 +15,6 @@ import javax.swing.*;
 public class MatchRecordDialog extends JDialog{
     
 	public static MatchRecordDialog _instance;
-	//private final JDialog matchFrame;
     private final JPanel fullPanel;
     private final JPanel bodyPanel;
     private final JPanel topPanel;

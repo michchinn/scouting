@@ -5,24 +5,31 @@ import java.util.Vector;
 
 public class Team {
 	
-	private int _number;
-	private String _name;
+	private int number;
+	private String name;
 	private Vector<MatchRecord> _matchRecords;
+	private Interview interview;
 	
 	public Team(int number, String name) {
-		_number = number;
-		_name = name;
+		this.number = number;
+		this.name = name;
+		interview = new Interview();
 		_matchRecords = new Vector<MatchRecord>();
 	}
 	
 	public int getNumber() {
-		return _number;
+		return number;
 	}
 	
 	public String getName() {
-		return _name;
+		return name;
 	}
-	
+	public Interview getInterview(){
+		return this.interview;
+	}
+	public void setInterview(Interview interview){
+		this.interview = interview;
+	}
 	public void addMatchRecord(MatchRecord matchRecord) {
 		_matchRecords.add(matchRecord);
 		Collections.sort(_matchRecords, new Comparator<MatchRecord>() {
@@ -151,6 +158,6 @@ public class Team {
 	}
 	
 	public String toString() {
-		return "" + _number;
+		return "" + number;
 	}
 }

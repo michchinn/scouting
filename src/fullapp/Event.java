@@ -42,6 +42,43 @@ public class Event {
 				teamName = (String) (teamObject.get("name"));
 				teamNumber = Integer.parseInt("" + teamObject.get("number"));
 				_teamList.add(new Team(teamNumber,teamName));
+				
+				JSONObject interviewObj = (JSONObject)teamObject.get("interview");
+				
+				int teamNumber3 = Integer.parseInt("" + interviewObj.get("teamNumber"));
+				String teamName3 = (String) interviewObj.get("teamName");
+				String scoutName = (String) interviewObj.get("scoutName");
+				int length = Integer.parseInt("" + interviewObj.get("length"));
+				int width = Integer.parseInt("" + interviewObj.get("width"));
+				int weight = Integer.parseInt("" + interviewObj.get("weight"));
+				int driveWheels = Integer.parseInt("" + interviewObj.get("driveWheels"));
+				String driveSystem = (String) interviewObj.get("driveSystem");
+				boolean hasDropCenterWheels = Boolean.parseBoolean("" + interviewObj.get("hasDropCenterWheels"));
+				int speed = Integer.parseInt("" + interviewObj.get("speed"));
+				String shooterType = (String) interviewObj.get("shooterType");
+				boolean canMakeTrussShots = Boolean.parseBoolean("" + interviewObj.get("canMakeTrussShots"));
+				String possibleGoals = (String) interviewObj.get("possibleGoals");
+				String acquiredLocations = (String) interviewObj.get("acquiredLocations");
+				String intakeMechanism = (String) interviewObj.get("intakeMechanism");
+				String catchingMechanism = (String) interviewObj.get("catchingMechanism");
+				boolean hasAutonomous = Boolean.parseBoolean("" + interviewObj.get("hasAutonomous"));
+				String startingPosition = (String) interviewObj.get("startingPosition");
+				String autonScoreLocations = (String) interviewObj.get("autonScoreLocations");
+				boolean targetsHotGoal = Boolean.parseBoolean("" + interviewObj.get("targetsHotGoal"));
+				int autonBallsScored = Integer.parseInt("" + interviewObj.get("autonBallsScored"));
+				String autonComment = (String) interviewObj.get("autonComment");
+				String generalComment = (String) interviewObj.get("generalComment");
+				
+				_teamList.get(_teamList.size()-1).setInterview(new Interview(teamNumber,teamName,scoutName,
+						length,width,weight,driveWheels,
+						driveSystem,hasDropCenterWheels,speed,
+						shooterType,canMakeTrussShots,
+						possibleGoals,acquiredLocations,
+						intakeMechanism,catchingMechanism,
+						hasAutonomous,startingPosition,
+						autonScoreLocations,targetsHotGoal,
+						autonBallsScored,autonComment,generalComment));
+				
 				JSONArray matchRecordsArray = (JSONArray) teamObject.get("matchRecords");
 				for( int j = 0; j < matchRecordsArray.size(); j++ ){
 					JSONObject matchObj = (JSONObject) matchRecordsArray.get(j);
@@ -50,7 +87,7 @@ public class Event {
 					String teamName2 = ("" + matchObj.get("teamName"));
 					String eventAbbreviation = ("" + matchObj.get("eventAbbreviation"));
 					int matchNumber  = Integer.parseInt("" + matchObj.get("matchNumber"));
-					String scoutName = ("" + matchObj.get("scoutName"));
+					String scoutName2 = ("" + matchObj.get("scoutName"));
 					
 					int autoTopScoredNotHot = Integer.parseInt("" + matchObj.get("autoTopScoredNotHot"));
 					int autoTopShotNotHot = Integer.parseInt("" + matchObj.get("autoTopShotNotHot"));
@@ -62,9 +99,9 @@ public class Event {
 					int hotGoalBottomShot = Integer.parseInt("" + matchObj.get("hotGoalBottomShot"));
 					boolean mobility = Boolean.parseBoolean(("" + matchObj.get("mobility")));
 					
-					boolean startingPosition = Boolean.parseBoolean(("" + matchObj.get("startingPosition")));
+					boolean startingPosition2 = Boolean.parseBoolean(("" + matchObj.get("startingPosition")));
 					String positionPlayed = ("" + matchObj.get("positionPlayed"));
-					int speed = Integer.parseInt("" + matchObj.get("speed"));
+					int speed2 = Integer.parseInt("" + matchObj.get("speed"));
 					int agility = Integer.parseInt("" + matchObj.get("agility"));
 					int pushingAbility = Integer.parseInt("" + matchObj.get("pushingAbility"));
 					int stability = Integer.parseInt("" + matchObj.get("stability"));
@@ -90,10 +127,10 @@ public class Event {
 				    String robotFlaws = ("" + matchObj.get("robotFlaws"));    
 			
 					_teamList.get(i).addMatchRecord(new MatchRecord(teamNumber2,teamName2,eventAbbreviation,matchNumber,
-					scoutName,autoTopScoredNotHot,autoTopShotNotHot,
+					scoutName2,autoTopScoredNotHot,autoTopShotNotHot,
 					autoBottomScoredNotHot,autoBottomShotNotHot,hotGoalTopScored,
 					hotGoalTopShot,hotGoalBottomScored,hotGoalBottomShot,
-					mobility,positionPlayed,startingPosition,speed,agility,
+					mobility,positionPlayed,startingPosition2,speed2,agility,
 					pushingAbility,stability,ballsScoredTopTeleop,
 					ballsShotTopTeleop,ballsScoredBottomTeleop,
 					ballsShotBottomTeleop,shooterSpeed,pickUpSpeed,
@@ -181,6 +218,41 @@ public class Event {
 			JSONObject teamObj = new JSONObject();
 			teamObj.put("number", team.getNumber());
 			teamObj.put("name", team.getName());
+			
+			JSONObject interviewObj = new JSONObject();
+			Interview in = team.getInterview();
+			
+			/***General Team Info***/
+			interviewObj.put("teamNumber", in.getTeamNumber());
+			interviewObj.put("teamName", in.getTeamName());
+			interviewObj.put("scoutName", in.getScoutName());
+			/***Drive System***/
+			interviewObj.put("length", in.getLength());
+			interviewObj.put("width", in.getWidth());
+			interviewObj.put("weight", in.getWeight());
+			interviewObj.put("driveWheels", in.getDriveWheels());
+			interviewObj.put("driveSystem", in.getDriveSystem());
+			interviewObj.put("hasDropCenterWheels", in.isHasDropCenterWheels());
+			interviewObj.put("speed", in.getSpeed());
+			/***Shooter System***/
+			interviewObj.put("shooterType", in.getShooterType());
+			interviewObj.put("canMakeTrussShots", in.isCanMakeTrussShots());
+			interviewObj.put("possibleGoals", in.getPossibleGoals());
+			/***Acquiring Balls***/
+			interviewObj.put("acquiredLocations", in.getAcquiredLocations());
+			interviewObj.put("intakeMechanism", in.getIntakeMechanism());
+			interviewObj.put("catchingMechanism", in.getCatchingMechanism());
+			/***Autonomous***/
+			interviewObj.put("hasAutonomous", in.isHasAutonomous());
+			interviewObj.put("startingPosition", in.getStartingPosition());
+			interviewObj.put("autonScoreLocations", in.getAutonScoreLocations());
+			interviewObj.put("targetsHotGoal", in.isTargetsHotGoal());
+			interviewObj.put("autonBallsScored", in.getAutonBallsScored());
+			interviewObj.put("autonComment", in.getAutonComment());
+			/***Overall***/
+			interviewObj.put("generalComment", in.getGeneralComment());
+			
+			teamObj.put("interview", interviewObj);
 			
 			JSONArray matchRecordArray = new JSONArray();
 			for (int j = 0; j < team.getNumberOfMatchRecords(); j++) {

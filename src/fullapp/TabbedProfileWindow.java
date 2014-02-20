@@ -15,8 +15,11 @@ public class TabbedProfileWindow extends JTabbedPane {
 		
 		m_teamWindow = new TeamProfileWindow(t,e);
 		m_interviewPanel = new TeamInterviewPanel(t,e);
-		addTab("Profile Window", m_teamWindow);
-		addTab("Interview", m_interviewPanel);
+		JScrollPane windowPane = new JScrollPane(m_teamWindow);
+		JScrollPane interviewPane = new JScrollPane(m_interviewPanel);
+		
+		addTab("Profile Window", windowPane);
+		addTab("Interview", interviewPane);
 		
 	}
 	public int getTeamNumber(){

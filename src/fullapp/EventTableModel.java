@@ -49,7 +49,6 @@ public class EventTableModel extends AbstractTableModel{
 	 */
 	public Object getValueAt(int row, int col) {	
 		Team team = _data.get(row);
-		System.out.println(team.getNumber() + " " + row);
 		switch(col) {
 			case 0: return team.getNumber();
 			case 1: return team.getAveragePointsPerMatch();

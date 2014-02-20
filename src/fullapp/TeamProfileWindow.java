@@ -272,8 +272,8 @@ public class TeamProfileWindow extends JPanel {
 		
 		
 		// Add the subpanels to the frame.
-		Container contentPane = this;
-		setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+		Container contentPane = new JPanel();
+		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		((JPanel)contentPane).setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		
 		contentPane.add(titlePanel);
@@ -282,7 +282,7 @@ public class TeamProfileWindow extends JPanel {
 		contentPane.add(bottomPanel);
 		
 		contentPane.setFocusable(true);
-		
+		add(contentPane);
 	}
 	
 	private void openAddMatchRecordDialog() throws IOException, ParseException {

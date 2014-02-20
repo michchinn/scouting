@@ -24,6 +24,7 @@ import java.util.Comparator;
 import java.util.Scanner;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.Icon;
@@ -274,9 +275,11 @@ public class EventOverviewWindow extends JDialog {
 		((JPanel)contentPane).setBorder(BorderFactory.createEmptyBorder(10,10,10,10));*/
 		
 		JPanel contentPane = new JPanel();
+		contentPane.setLayout(new BoxLayout(contentPane, 0));
 		contentPane.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 
 		contentPane.add(eventTablePanel, BorderLayout.CENTER);
+		Box.createRigidArea(new Dimension(0,50));
 		contentPane.add(rightPanelContainer, BorderLayout.EAST);
 		contentPane.setFocusable(true);
 		
@@ -293,7 +296,7 @@ public class EventOverviewWindow extends JDialog {
 
 		add(mainTabbedPane);
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		setPreferredSize(new Dimension((int)d.getWidth()-100,(int)d.getHeight()-100));
+		setPreferredSize(new Dimension((int)d.getWidth()-250,(int)d.getHeight()-150));
 	}
 	public void addClosableTab(final JTabbedPane tabbedPane, final JComponent c, final String title) {
 	    // Add the tab to the pane without any label
@@ -334,8 +337,7 @@ public class EventOverviewWindow extends JDialog {
 	    ActionListener listener = new ActionListener() {
 	      @Override
 	      public void actionPerformed(ActionEvent e) {
-	    	System.out.println("PRESSED");
-	        tabbedPane.remove(c);
+	    	tabbedPane.remove(c);
 	      }
 	    };
 	    btnClose.addActionListener(listener);

@@ -137,8 +137,10 @@ public class EventOverviewWindow extends JDialog {
 		
 			MatchRecordDialog dialog = null;
 			dialog = new MatchRecordDialog(_currentEvent);
-			dialog.setTeamNumber(_currentEvent.getTeamList().get(_eventTable.getSelectedRow()).getNumber());
-			dialog.setTeamName(_currentEvent.getTeamList().get(_eventTable.getSelectedRow()).getName());
+			if(_eventTable.getSelectedRow() != -1){
+				dialog.setTeamNumber(_currentEvent.getTeamList().get(_eventTable.getSelectedRow()).getNumber());
+				dialog.setTeamName(_currentEvent.getTeamList().get(_eventTable.getSelectedRow()).getName());
+			}
 			_eventTable.clearSelection();
 			dialog.setVisible(true);
 		}

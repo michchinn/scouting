@@ -1,5 +1,7 @@
 package fullapp;
 
+import inputSubPanels.SpringUtilities;
+
 import java.awt.*;
 
 import javax.swing.*;
@@ -20,6 +22,7 @@ public class TeamInterviewPanel extends JPanel {
 	public TeamInterviewPanel(Team t, Event e){
 				
 		m_photoPanel = new PhotoPanel(t);
+		m_autonPanel = new IAutonPanel(_interview); 
 		
 		add(m_photoPanel);
 		
@@ -62,5 +65,23 @@ class IAutonPanel extends JPanel{
 	public IAutonPanel(Interview i){
 		
 	}
+	
+}
+
+class AutonNoComment extends JPanel{
+	
+	public AutonNoComment(Interview i){
+		
+		add(new JLabel("Has an autonomous"));
+		if(i.isHasAutonomous())
+			add(new JLabel("YES"));
+		else
+			add(new JLabel("NO"));
+		
+		setLayout(new SpringLayout());
+		SpringUtilities.makeCompactGrid(this, 4, 2, 0, 0, 0, 0);
+	}
+}
+class AutonComment extends JPanel{
 	
 }

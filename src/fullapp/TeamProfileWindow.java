@@ -26,7 +26,6 @@ public class TeamProfileWindow extends JPanel {
 	private JButton _viewEditButton;
 	private JButton _deleteButton;
 	private JButton _uploadButton;
-	private JButton _closeButton;
 	
 /*	private JTabbedPane _graphPane;
 	private GraphPanel _totalPointsGraph;
@@ -211,13 +210,6 @@ public class TeamProfileWindow extends JPanel {
 		_uploadButton = new JButton("Upload/Change Picture");
 		_uploadButton.addActionListener(new UploadButtonListener());
 		
-		_closeButton = new JButton("Close");
-		_closeButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TeamProfileWindow.this.setVisible(false);
-			}
-		});
-		
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 		buttonPanel.add(_addButton);
@@ -278,9 +270,6 @@ public class TeamProfileWindow extends JPanel {
 //		bottomPanel.add(_graphPane);
 		bottomPanel.add(teamSummaryContainer);
 		
-		JPanel closePanel = new JPanel();
-		closePanel.setBorder(BorderFactory.createEmptyBorder(0, 600, 0, 0));
-		closePanel.add(_closeButton);
 		
 		// Add the subpanels to the frame.
 		Container contentPane = this;
@@ -291,7 +280,6 @@ public class TeamProfileWindow extends JPanel {
 		contentPane.add(topPanel);
 		contentPane.add(buttonPanel);
 		contentPane.add(bottomPanel);
-		contentPane.add(closePanel);
 		
 		contentPane.setFocusable(true);
 		

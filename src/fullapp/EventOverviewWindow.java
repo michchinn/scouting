@@ -1,64 +1,24 @@
 package fullapp;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Scanner;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.util.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultListSelectionModel;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import javax.swing.*;
+import javax.swing.event.*;
 
 @SuppressWarnings("serial")
-public class EventOverviewWindow extends JDialog {
+public class EventOverviewWindow extends JFrame {
 	
 	private static EventOverviewWindow _instance;
 	public JTabbedPane mainTabbedPane;
 	
-	private Event _currentEvent;
+	public Event _currentEvent;
 	private Team _currentTeam;
 	
 	private EventTableModel _eventTableModel;
-	private JTable _eventTable;
+	public JTable _eventTable;
 	
 	private ArrayList<Event> _eventList;
 	
@@ -75,7 +35,8 @@ public class EventOverviewWindow extends JDialog {
 	private Image aerAssist;
 	
 	private static float[] floats = {0,0,0};
-	private static Color daisyDarkBlue; // = Color.getHSBColor(floats[0], floats[1], floats[2]);
+	public static Color daisyDarkBlue; // = Color.getHSBColor(floats[0], floats[1], floats[2]);
+	public static Color daisyLightBlue;
 	
 	public static String pathToData;
 	
@@ -131,7 +92,20 @@ public class EventOverviewWindow extends JDialog {
 			f.setVisible(true);
 		}
 	}
-	
+	class InterviewButton extends JButton implements ActionListener{
+
+		public InterviewButton(){
+			super("Add Interview");
+			addActionListener(this);
+		}
+		
+		public void actionPerformed(ActionEvent arg0) {
+			InterviewDialog d = new InterviewDialog(new Interview()); 
+			d.pack();
+			d.setVisible(true);
+		}
+		
+	}
 	class AddRecordListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 		
@@ -160,6 +134,8 @@ public class EventOverviewWindow extends JDialog {
 		
 		floats = Color.RGBtoHSB(0, 81, 126,floats);
 		daisyDarkBlue = Color.getHSBColor(floats[0], floats[1], floats[2]);
+		floats = Color.RGBtoHSB(0, 134, 203, floats);
+		daisyLightBlue = Color.getHSBColor(floats[0], floats[1], floats[2]);
 		
 		pathToData = System.getProperty("user.home") + "/Desktop/FRCData";
 		_currentEvent = new Event("Hatboro-Horsham FIRST Robotics District Competition","PAHAT",142);
@@ -260,6 +236,9 @@ public class EventOverviewWindow extends JDialog {
 		buttonPanel2.add(_predictButton);
 		buttonPanel2.add(_addRecordButton);
 		
+		JPanel buttonPanel3 = new JPanel();
+		buttonPanel3.add(new InterviewButton());
+		
 		JPanel rightPanel = new JPanel();
 		rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
 		rightPanel.add(logoPanel);
@@ -267,6 +246,7 @@ public class EventOverviewWindow extends JDialog {
 		rightPanel.add(eventDetailPanel);
 		rightPanel.add(buttonPanel);
 		rightPanel.add(buttonPanel2);
+		rightPanel.add(buttonPanel3);
 		
 		JPanel rightPanelContainer = new JPanel();
 		rightPanelContainer.add(rightPanel);
@@ -313,9 +293,13 @@ public class EventOverviewWindow extends JDialog {
 
 	    // Add a JLabel with title and the left-side tab icon
 	    JLabel lblTitle = new JLabel(title);
+	    
 
 	    // Create a JButton for the close tab button
 	    JButton btnClose = new JButton("X");
+	    Font font = new Font(btnClose.getFont().getName(),Font.BOLD,btnClose.getFont().getSize());
+	    btnClose.setFont(font);
+	    btnClose.setForeground(Color.RED);
 	    btnClose.setOpaque(false);
 
 	    // Set border null so the button doesn't make the tab too big
@@ -337,7 +321,6 @@ public class EventOverviewWindow extends JDialog {
 
 	    // Add the listener that removes the tab
 	    ActionListener listener = new ActionListener() {
-	      @Override
 	      public void actionPerformed(ActionEvent e) {
 	    	tabbedPane.remove(c);
 	      }
@@ -394,9 +377,7 @@ class ClosingButton extends JPanel implements ActionListener{
 		this.setFocusable(false);
 	}
 	
-	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		System.out.println("Pressed");
 		Main.frame.mainTabbedPane.remove(this.tabIndex-1);
 		Main.frame.mainTabbedPane.repaint();
 		Main.frame.mainTabbedPane.revalidate();

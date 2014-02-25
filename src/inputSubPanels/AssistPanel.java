@@ -4,83 +4,48 @@ import javax.swing.*;
 
 public class AssistPanel extends JPanel {
 
-	private JButton possessionsPlus;
-	private JButton possessionsMinus;
 	private JTextField possessionsText;
-	
-	private JButton successfulPassesPlus;
-	private JButton successfulPassesMinus;
 	private JTextField successfulPassesText;
-	
-	private JButton totalPassesPlus;
-	private JButton totalPassesMinus;
 	private JTextField totalPassesText;
-	
-	private JButton successfulTrussThrowsPlus;
-	private JButton successfulTrussThrowsMinus;
 	private JTextField successfulTrussThrowsText;
-	
-	private JButton totalTrussThrowsPlus;
-	private JButton totalTrussThrowsMinus;
 	private JTextField totalTrussThrowsText;
-	
-	private JButton successfulCatchesPlus;
-	private JButton successfulCatchesMinus;
 	private JTextField successfulCatchesText;
-	
-	private JButton totalCatchesPlus;
-	private JButton totalCatchesMinus;
 	private JTextField totalCatchesText;
 	
-	public AssistPanel(){
-		  possessionsPlus = new JButton("+");
-		  possessionsMinus = new JButton("-");
-		  possessionsText = new JTextField(3);
-		  Methods.scoringWithButtons(possessionsPlus, possessionsMinus, possessionsText);
-		  add(new JLabel("Possessions"));
-		  add(possessionsMinus);add(possessionsPlus);add(possessionsText);
-		  //////////////////////////////////////
-		  successfulPassesPlus = new JButton("+");
-		  successfulPassesMinus = new JButton("-");
-		  successfulPassesText = new JTextField(3);
-		  Methods.scoringWithButtons(successfulPassesPlus, successfulPassesMinus, successfulPassesText);
-		  add(new JLabel("Successful Passes"));
-		  add(successfulPassesMinus);add(successfulPassesPlus);add(successfulPassesText);
-		  //////////////////////////////////////
-		  totalPassesPlus = new JButton("+");
-		  totalPassesMinus = new JButton("-");
-		  totalPassesText = new JTextField(3);
-		  Methods.scoringWithButtons(totalPassesPlus, totalPassesMinus, totalPassesText);
-		  add(new JLabel("Total Passes"));
-		  add(totalPassesMinus);add(totalPassesPlus);add(totalPassesText);
-		  //////////////////////////////////////
-		  successfulTrussThrowsPlus = new JButton("+");
-		  successfulTrussThrowsMinus = new JButton("-");
-		  successfulTrussThrowsText = new JTextField(3);
-		  Methods.scoringWithButtons(successfulTrussThrowsPlus, successfulTrussThrowsMinus, successfulTrussThrowsText);
-		  add(new JLabel("Successful Truss Throws"));
-		  add(successfulTrussThrowsMinus);add(successfulTrussThrowsPlus);add(successfulTrussThrowsText);
-		  //////////////////////////////////////
-		  totalTrussThrowsPlus = new JButton("+");
-		  totalTrussThrowsMinus = new JButton("-");
-		  totalTrussThrowsText = new JTextField(3);
-		  Methods.scoringWithButtons(totalTrussThrowsPlus, totalTrussThrowsMinus, totalTrussThrowsText);
-		  add(new JLabel("Total Truss Throws"));
-		  add(totalTrussThrowsMinus);add(totalTrussThrowsPlus);add(totalTrussThrowsText);
-		  //////////////////////////////////////
-		  successfulCatchesPlus = new JButton("+");
-		  successfulCatchesMinus = new JButton("-");
-		  successfulCatchesText = new JTextField(3);
-		  Methods.scoringWithButtons(successfulCatchesPlus, successfulCatchesMinus, successfulCatchesText);
-		  add(new JLabel("Successful Catches"));
-		  add(successfulCatchesMinus);add(successfulCatchesPlus);add(successfulCatchesText);
-		  //////////////////////////////////////
-		  totalCatchesPlus = new JButton("+");
-		  totalCatchesMinus = new JButton("-");
-		  totalCatchesText = new JTextField(3);
-		  Methods.scoringWithButtons(totalCatchesPlus, totalCatchesMinus, totalCatchesText);
-		  add(new JLabel("Total Catches"));
-		  add(totalCatchesMinus);add(totalCatchesPlus);add(totalCatchesText);
+	public AssistPanel(){ 		  
+		
+		possessionsText = new JTextField("0",3);
+		successfulPassesText = new JTextField("0",3);
+		totalPassesText = new JTextField("0",3);
+		successfulTrussThrowsText = new JTextField("0",3);
+		totalTrussThrowsText = new JTextField("0",3);
+		successfulCatchesText = new JTextField("0",3);
+		totalCatchesText = new JTextField("0",3);
+		
+		  add(new JLabel("Possessions      "));
+		  add(possessionsText);
+		  
+		  add(new JLabel());
+		  add(new JLabel());
+		  
+		  add(new JLabel("Passes"));
+		  add(successfulPassesText);
+		  
+		  add(new JLabel("/"));
+		  add(totalPassesText);
+		  
+		  add(new JLabel("Truss Throws"));
+		  add(successfulTrussThrowsText);
+		  
+		  add(new JLabel("/"));
+		  add(totalTrussThrowsText);
+		  
+		  add(new JLabel("Catches"));
+		  add(successfulCatchesText);
+		  
+		  add(new JLabel("/"));
+		  add(totalCatchesText);
+		  
 		  setLayout(new SpringLayout());
 		  SpringUtilities.makeCompactGrid(this, this.getComponentCount() / 4, 4,
 					0, 0, 0, 0);
@@ -88,22 +53,43 @@ public class AssistPanel extends JPanel {
 	public int getPossessions(){
 		return Integer.parseInt(possessionsText.getText());
 	}
-	public int getSuccessfulPasses(){
+	public void setPossessions(int possessions){
+		possessionsText.setText(Integer.toString(possessions));
+	}
+	public int getPassesComplete(){
 		return Integer.parseInt(successfulPassesText.getText());
 	}
-	public int getTotalPasses(){
+	public void setPassesComplete(int passesComplete){
+		successfulPassesText.setText(Integer.toString(passesComplete));
+	}
+	public int getPassesTotal(){
 		return Integer.parseInt(totalPassesText.getText());
 	}
-	public int getSuccessfulTrussThrows(){
+	public void setPassesTotal(int passesTotal){
+		totalPassesText.setText(Integer.toString(passesTotal));
+	}
+	public int getTrussThrowsComplete(){
 		return Integer.parseInt(successfulTrussThrowsText.getText());
 	}
-	public int getTotalTrussThrows(){
+	public void setTrussThrowsComplete(int trussThrowsComplete){
+		successfulTrussThrowsText.setText(Integer.toString(trussThrowsComplete));
+	}
+	public int getTrussThrowsTotal(){
 		return Integer.parseInt(totalTrussThrowsText.getText());
 	}
-	public int getSuccessfulCatches(){
+	public void setTrussThrowsTotal(int trussThrowsTotal){
+		totalTrussThrowsText.setText(Integer.toString(trussThrowsTotal));
+	}
+	public int getCatchesComplete(){
 		return Integer.parseInt(successfulCatchesText.getText());
 	}
-	public int getTotalCatches(){
+	public void setCatchesComplete(int catchesComplete){
+		successfulCatchesText.setText(Integer.toString(catchesComplete));
+	}
+	public int getCatchesTotal(){
 		return Integer.parseInt(totalCatchesText.getText());
+	}
+	public void setCatchesTotal(int catchesTotal){
+		totalCatchesText.setText(Integer.toString(catchesTotal));
 	}
 }

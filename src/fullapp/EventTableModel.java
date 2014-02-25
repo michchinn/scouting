@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class EventTableModel extends AbstractTableModel{
-	private String[] _columnNames = {"Team #", "Avg. Pts/Match", "Avg. Auton. Pts.", "Avg. Teleop. Pts.", "Avg. Accuracy","Number of Matches"};
+	private String[] _columnNames = {"Team #", "Avg. Pts/Match", "Avg. Auton. Pts.", "Avg. Teleop. Pts.", "Avg. Top Acc","Number of Matches"};
 	private ArrayList<Team> _data = new ArrayList<Team>();
 	
 	public Class<?> getColumnClass(int col) {
@@ -54,7 +54,7 @@ public class EventTableModel extends AbstractTableModel{
 			case 1: return team.getAveragePointsPerMatch();
 			case 2: return team.getAverageAutonPointsPerMatch();
 			case 3: return team.getAverageTeleopPointsPerMatch();
-			case 4: return team.getAverageTeleopShootingPercentage();
+			case 4: return team.getAverageTopTeleopShootingPercentage();
 			case 5: return team.getNumberOfMatchRecords();
 		}
 		return null;

@@ -103,7 +103,7 @@ public class PredictionDialog extends JDialog {
 		
 		public void setTeam(Team team) {
 			_avgPtsLabel.setText("" + team.getAveragePointsPerMatch());
-			_accuracyLabel.setText("" + team.getAverageTeleopShootingPercentage());
+			_accuracyLabel.setText("" + team.getAverageTopTeleopShootingPercentage());
 			_maxAutonLabel.setText("" + team.getMaxAutonomousPoints());
 			_maxTeleopLabel.setText("" + team.getMaxTeleoperatedPoints());
 		}

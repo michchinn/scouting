@@ -100,14 +100,26 @@ public class Team {
 		return (double)Math.round(avg * 10000) / 10000;
 	}
 	
-	public double getAverageTeleopShootingPercentage() {
+	public double getAverageTopTeleopShootingPercentage() {
 		if (_matchRecords.size() == 0) {
 			return 0;
 		}
 		
 		double accuracy = 0;
 		for (int i = 0; i < _matchRecords.size(); i++) {
-				accuracy += _matchRecords.get(i).getTeleopShootingPercentage();
+				accuracy += _matchRecords.get(i).getTopShootingPercentage();
+		}
+		double avg = (double)(accuracy) / (double)(_matchRecords.size()); 
+		return (double)Math.round(avg * 10000) / 10000;
+	}
+	public double getAveragBottomTeleopShootingPercentage() {
+		if (_matchRecords.size() == 0) {
+			return 0;
+		}
+		
+		double accuracy = 0;
+		for (int i = 0; i < _matchRecords.size(); i++) {
+				accuracy += _matchRecords.get(i).getBottomShootingPercentage();
 		}
 		double avg = (double)(accuracy) / (double)(_matchRecords.size()); 
 		return (double)Math.round(avg * 10000) / 10000;
@@ -160,4 +172,46 @@ public class Team {
 	public String toString() {
 		return "" + number;
 	}
+
+	public double getAverageDriverAbility(){
+		try{int total = 0;
+		for( int i = 0; i < this.getNumberOfMatchRecords(); i++ )
+			total += this.getMatchRecord(i).getDriverAbility();
+		return total/this.getNumberOfMatchRecords();}
+		catch(Exception e){return 0.0;}
+	}
+
+	public double getAverageManeuverability(){
+		try{int total = 0;
+		for( int i = 0; i < this.getNumberOfMatchRecords(); i++ )
+			total += this.getMatchRecord(i).getManeuverability();
+		return total/this.getNumberOfMatchRecords();}
+		catch(Exception e){return 0.0;}
+	}
+
+	public double getAverageStability(){
+		try{int total = 0;
+		for( int i = 0; i < this.getNumberOfMatchRecords(); i++ )
+			total += this.getMatchRecord(i).getStability();
+		return total/this.getNumberOfMatchRecords();}
+		catch(Exception e){return 0.0;}
+	}
+
+	public double getAveragePushingAbility(){
+		try{int total = 0;
+		for( int i = 0; i < this.getNumberOfMatchRecords(); i++ )
+			total += this.getMatchRecord(i).getPushingAbility();
+		return total/this.getNumberOfMatchRecords();}
+		catch(Exception e){return 0.0;}
+	}
+	
+	public double getAverageSpeed(){
+		try{int total = 0;
+		for( int i = 0; i < this.getNumberOfMatchRecords(); i++ )
+			total += this.getMatchRecord(i).getSpeed();
+		return total/this.getNumberOfMatchRecords();}
+		catch(Exception e){return 0.0;}
+	}
+	
+	
 }

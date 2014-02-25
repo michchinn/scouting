@@ -4,8 +4,28 @@ import javax.swing.table.AbstractTableModel;
 import java.util.Vector;
 
 public class MatchRecordTableModel extends AbstractTableModel{
-	private String[] _columnNames = {"Match #", "# Auton. High", "# Auton. Low", "Auton. Score", "# Teleop High", "# Teleop Low", "# Trusses", "# Catches", "Teleop Score","Possessions", "Start Pos.", "Play Style"};
+	private String[] _columnNames = {"Match #","Auton. High","Auton. Hot High","Auton. Score", "# Teleop High","# Teleop Low","Teleop Top Acc.", "Catches", "Trusses","Teleop Score","Possessions", "Play Style"};
 	private Team _team;
+
+	public Object getValueAt(int row, int col) {
+		
+		MatchRecord record = _team.getMatchRecord(row);
+		switch(col) {
+			case 0: return record.getMatchNumber();
+			case 1: return record.getTopAutonScored();
+			case 2: return record.getTopHot();
+			case 3: return record.getAutonPoints();
+			case 4: return record.getTopTeleopScored();
+			case 5: return record.getBottomTeleopScored();
+			case 6: return record.getTopShootingPercentage();
+			case 7: return record.getCatchesComplete();
+			case 8: return record.getTrussThrowsComplete();
+			case 9: return record.getTeleopPoints();
+			case 10: return record.getPossessions();			
+			case 11: return record.getPosistionPlayed();
+		}
+		return null;
+	}
 	
 	public Class<?> getColumnClass(int col) {
 		return Integer.class;
@@ -36,29 +56,6 @@ public class MatchRecordTableModel extends AbstractTableModel{
 		return _team.getMatchRecord(row);
 	}
 	
-	/**
-	 * TODO: Return proper values once team class is completed.
-	 * @return The item in a specified cell of the table.
-	 */
-	public Object getValueAt(int row, int col) {
-		//String currentEventAbbr = EventOverviewWindow.getInstance().getCurrentEvent().getAbbreviation();
-		MatchRecord record = _team.getMatchRecord(row);
-		switch(col) {
-			case 0: return record.getMatchNumber();
-			case 1: return record.getAutoTopScoredNotHot() + record.getHotGoalTopScored();
-			case 2: return record.getAutoBottomScoredNotHot() + record.getHotGoalBottomScored();
-			case 3: return record.getAutonPoints();
-			case 4: return record.getBallsScoredTopTeleop();
-			case 5: return record.getBallsScoredBottomTeleop();
-			case 6: return record.getSuccessfulTrussThrows();
-			case 7: return record.getSuccessfulCatches();
-			case 8: return record.getTeleopPoints();
-			case 9: return record.getPossessions();
-			case 10: if(record.getStartingPosition())return "WHITE";else return "GOALIE";
-			case 11: return record.getPositionPlayed();
-		}
-		return null;
-	}
 	
 	public void setValueAt(int row, MatchRecord record) {
 		_team.setMatchRecord(row, record);

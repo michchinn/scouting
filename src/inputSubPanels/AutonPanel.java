@@ -1,5 +1,7 @@
 package inputSubPanels;
 
+import java.awt.Color;
+
 import javax.swing.*;
 
 import fullapp.MatchRecord;
@@ -20,196 +22,112 @@ public class AutonPanel extends JPanel {
 		add(sAM);
 		setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
 	}
-	public AutonPanel(MatchRecord r) {
-		add(new JLabel("Autonomous"));
-		sP = new ScoringPanel(r);
-		add(sP);	
-		sAM = new startingAndMobility(r);
-		add(sAM);
-		setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
-	}
-	public int getAutoTopScoredNotHot(){
+	
+	public int getTopAutonScored(){
 		return Integer.parseInt(sP.tTopScoredNotHot.getText());
 	}
-	public int getAutoTopShotNotHot(){
+	public void setTopAutonScored(int topAutonScored){
+		sP.tTopScoredNotHot.setText(Integer.toString(topAutonScored));
+	}
+	public int getTopAutonShot(){
 		return Integer.parseInt(sP.tTopShotNotHot.getText());
 	}
-	public int getAutoBottomScoredNotHot(){
+	public void setTopAutonShot(int topAutonShot){
+		sP.tTopShotNotHot.setText(Integer.toString(topAutonShot));
+	}
+	public int getBottomAutonScored(){
 		return Integer.parseInt(sP.tBottomScoredNotHot.getText());
 	}
-	public int getAutoBottomShotNotHot(){
+	public void setBottomAutonScored(int bottomAutonScored){
+		sP.tBottomScoredNotHot.setText(Integer.toString(bottomAutonScored));
+	}
+	public int getBottomAutonShot(){
 		return Integer.parseInt(sP.tBottomShotNotHot.getText());
 	}
-	public int getHotGoalTopScored(){
+	public void setBottomAutonShot(int bottomAutonShot){
+		sP.tBottomShotNotHot.setText(Integer.toString(bottomAutonShot));
+	}
+	public int getTopHot(){
 		return Integer.parseInt(sP.tHotTopScored.getText());
 	}
-	public int getHotGoalTopShot(){
-		return Integer.parseInt(sP.tHotTopShot.getText());
+	public void setTopHot(int topHot){
+		sP.tHotTopScored.setText(Integer.toString(topHot));
 	}
-	public int getHotGoalBottomScored(){
+	public int getBottomHot(){
 		return Integer.parseInt(sP.tHotBottomScored.getText());
 	}
-	public int getHotGoalBottomShot(){
-		return Integer.parseInt(sP.tHotBottomShot.getText());
+	public void setBottomHot(int bottomHot){
+		sP.tHotBottomScored.setText(Integer.toString(bottomHot));
 	}
 	public boolean getMobility(){
-		startingAndMobility s = (startingAndMobility) getComponents()[2];
-		JRadioButton r = (JRadioButton)s.getComponents()[1];
+		startingAndMobility s = (startingAndMobility) getComponent(2);
+		JRadioButton r = (JRadioButton)s.getComponent(1);
 		return r.isSelected();
+	}
+	public void setMobility(boolean mobility){
+		JRadioButton y = (JRadioButton)sAM.getComponent(1);
+		JRadioButton n = (JRadioButton)sAM.getComponent(2);
+		if(mobility) y.setSelected(true);
+		else n.setSelected(true);
 	}
 	public boolean getStartingPosition(){
 		startingAndMobility s = (startingAndMobility) getComponents()[2];
 		JRadioButton r = (JRadioButton)s.getComponents()[4];
 		return r.isSelected();
 	}
+	public void setStartingPosition(boolean startingPosition){
+		JRadioButton y = (JRadioButton)sAM.getComponent(4);
+		JRadioButton n = (JRadioButton)sAM.getComponent(5);
+		if(startingPosition) y.setSelected(true);
+		else n.setSelected(true);
+	}
+
 }
 	class ScoringPanel extends JPanel{
 		
 		private MatchRecord mR = null;
 		
-		private JButton topScoredNotHotPlus;
-		private JButton topScoredNotHotMinus;
 		public JTextField tTopScoredNotHot;
-		private JButton topShotNotHotPlus;
-		private JButton topShotNotHotMinus;
 		public JTextField tTopShotNotHot;
-		private JButton bottomScoredNotHotPlus;
-		private JButton bottomScoredNotHotMinus;
 		public JTextField tBottomScoredNotHot;
-		private JButton bottomShotNotHotPlus;
-		private JButton bottomShotNotHotMinus;
 		public JTextField tBottomShotNotHot;
-		
-		private JButton hotTopScoredPlus;
-		private JButton hotTopScoredMinus;
 		public JTextField tHotTopScored;
-		private JButton hotTopShotPlus;
-		private JButton hotTopShotMinus;
 		public JTextField tHotTopShot;
-		private JButton hotBottomScoredPlus;
-		private JButton hotBottomScoredMinus;
 		public JTextField tHotBottomScored;
-		private JButton hotBottomShotPlus;
-		private JButton hotBottomShotMinus;
 		public JTextField tHotBottomShot;
 		
 		
 		public ScoringPanel(){
-			  topScoredNotHotPlus = new JButton("+");
-			  topScoredNotHotMinus = new JButton("-");
-			  tTopScoredNotHot = new JTextField(3);
-			  Methods.scoringWithButtons(topScoredNotHotPlus,topScoredNotHotMinus, tTopScoredNotHot);
-			  add(new JLabel("Top Scored Not Hot"));
-			  add(topScoredNotHotMinus);add(topScoredNotHotPlus);add(tTopScoredNotHot);
-			  ///////////////////////////////////
-			  topShotNotHotPlus = new JButton("+");
-			  topShotNotHotMinus = new JButton("-");
-			  tTopShotNotHot = new JTextField(3);
-			  Methods.scoringWithButtons(topShotNotHotPlus,topShotNotHotMinus, tTopShotNotHot);
-			  add(new JLabel("Top Shot Not Hot"));
-			  add(topShotNotHotMinus);add(topShotNotHotPlus);add(tTopShotNotHot);
-			  ///////////////////////////////////
-			  bottomScoredNotHotPlus = new JButton("+");
-			  bottomScoredNotHotMinus = new JButton("-");
-			  tBottomScoredNotHot = new JTextField(3);
-			  Methods.scoringWithButtons(bottomScoredNotHotPlus,bottomScoredNotHotMinus, tBottomScoredNotHot);
-			  add(new JLabel("Bottom Scored Not Hot"));
-			  add(bottomScoredNotHotMinus);add(bottomScoredNotHotPlus);add(tBottomScoredNotHot);
-			  ///////////////////////////////////
-			  bottomShotNotHotPlus = new JButton("+");
-			  bottomShotNotHotMinus = new JButton("-");
-			  tBottomShotNotHot = new JTextField(3);
-			  Methods.scoringWithButtons(bottomShotNotHotPlus,bottomShotNotHotMinus, tBottomShotNotHot);
-			  add(new JLabel("Bottom Shot Not Hot"));
-			  add(bottomShotNotHotMinus);add(bottomShotNotHotPlus);add(tBottomShotNotHot);
-			  ///////////////////////////////////
-			  hotTopScoredPlus = new JButton("+");
-			  hotTopScoredMinus = new JButton("-");
-			  tHotTopScored = new JTextField(3);
-			  Methods.scoringWithButtons(hotTopScoredPlus,hotTopScoredMinus, tHotTopScored);
-			  add(new JLabel("Top Scored Hot"));
-			  add(hotTopScoredMinus);add(hotTopScoredPlus);add(tHotTopScored);
-			  ///////////////////////////////////
-			  hotTopShotPlus = new JButton("+");
-			  hotTopShotMinus = new JButton("-");
-			  tHotTopShot = new JTextField(3);
-			  Methods.scoringWithButtons(hotTopShotPlus,hotTopShotMinus, tHotTopShot);
-			  add(new JLabel("Top Shot Hot"));
-			  add(hotTopShotMinus);add(hotTopShotPlus);add(tHotTopShot);
-			  ///////////////////////////////////
-			  hotBottomScoredPlus = new JButton("+");
-			  hotBottomScoredMinus = new JButton("-");
-			  tHotBottomScored = new JTextField(3);
-			  Methods.scoringWithButtons(hotBottomScoredPlus,hotBottomScoredMinus, tHotBottomScored);
-			  add(new JLabel("Bottom Scored Hot"));
-			  add(hotBottomScoredMinus);add(hotBottomScoredPlus);add(tHotBottomScored);
-			  ///////////////////////////////////
-			  hotBottomShotPlus = new JButton("+");
-			  hotBottomShotMinus = new JButton("-");
-			  tHotBottomShot = new JTextField(3);
-			  Methods.scoringWithButtons(hotBottomShotPlus,hotBottomShotMinus, tHotBottomShot);
-			  add(new JLabel("Bottom Shot Hot"));
-			  add(hotBottomShotMinus);add(hotBottomShotPlus);add(tHotBottomShot);
-			  setLayout(new SpringLayout());
-			  SpringUtilities.makeCompactGrid(this, this.getComponentCount() / 4, 4,
-						0, 0, 0, 0);
-		}
-		public ScoringPanel(MatchRecord r){
-			  topScoredNotHotPlus = new JButton("+");
-			  topScoredNotHotMinus = new JButton("-");
-			  tTopScoredNotHot = new JTextField(3);
-			  Methods.scoringWithButtons(topScoredNotHotPlus,topScoredNotHotMinus, tTopScoredNotHot);
-			  add(new JLabel("Top Scored Not Hot"));
-			  add(topScoredNotHotMinus);add(topScoredNotHotPlus);add(tTopScoredNotHot);
-			  ///////////////////////////////////
-			  topShotNotHotPlus = new JButton("+");
-			  topShotNotHotMinus = new JButton("-");
-			  tTopShotNotHot = new JTextField(3);
-			  Methods.scoringWithButtons(topShotNotHotPlus,topShotNotHotMinus, tTopShotNotHot);
-			  add(new JLabel("Top Shot Not Hot"));
-			  add(topShotNotHotMinus);add(topShotNotHotPlus);add(tTopShotNotHot);
-			  ///////////////////////////////////
-			  bottomScoredNotHotPlus = new JButton("+");
-			  bottomScoredNotHotMinus = new JButton("-");
-			  tBottomScoredNotHot = new JTextField(3);
-			  Methods.scoringWithButtons(bottomScoredNotHotPlus,bottomScoredNotHotMinus, tBottomScoredNotHot);
-			  add(new JLabel("Bottom Scored Not Hot"));
-			  add(bottomScoredNotHotMinus);add(bottomScoredNotHotPlus);add(tBottomScoredNotHot);
-			  ///////////////////////////////////
-			  bottomShotNotHotPlus = new JButton("+");
-			  bottomShotNotHotMinus = new JButton("-");
-			  tBottomShotNotHot = new JTextField(3);
-			  Methods.scoringWithButtons(bottomShotNotHotPlus,bottomShotNotHotMinus, tBottomShotNotHot);
-			  add(new JLabel("Bottom Shot Not Hot"));
-			  add(bottomShotNotHotMinus);add(bottomShotNotHotPlus);add(tBottomShotNotHot);
-			  ///////////////////////////////////
-			  hotTopScoredPlus = new JButton("+");
-			  hotTopScoredMinus = new JButton("-");
-			  tHotTopScored = new JTextField(3);
-			  Methods.scoringWithButtons(hotTopScoredPlus,hotTopScoredMinus, tHotTopScored);
-			  add(new JLabel("Top Scored Hot"));
-			  add(hotTopScoredMinus);add(hotTopScoredPlus);add(tHotTopScored);
-			  ///////////////////////////////////
-			  hotTopShotPlus = new JButton("+");
-			  hotTopShotMinus = new JButton("-");
-			  tHotTopShot = new JTextField(3);
-			  Methods.scoringWithButtons(hotTopShotPlus,hotTopShotMinus, tHotTopShot);
-			  add(new JLabel("Top Shot Hot"));
-			  add(hotTopShotMinus);add(hotTopShotPlus);add(tHotTopShot);
-			  ///////////////////////////////////
-			  hotBottomScoredPlus = new JButton("+");
-			  hotBottomScoredMinus = new JButton("-");
-			  tHotBottomScored = new JTextField(3);
-			  Methods.scoringWithButtons(hotBottomScoredPlus,hotBottomScoredMinus, tHotBottomScored);
-			  add(new JLabel("Bottom Scored Hot"));
-			  add(hotBottomScoredMinus);add(hotBottomScoredPlus);add(tHotBottomScored);
-			  ///////////////////////////////////
-			  hotBottomShotPlus = new JButton("+");
-			  hotBottomShotMinus = new JButton("-");
-			  tHotBottomShot = new JTextField(3);
-			  Methods.scoringWithButtons(hotBottomShotPlus,hotBottomShotMinus, tHotBottomShot);
-			  add(new JLabel("Bottom Shot Hot"));
-			  add(hotBottomShotMinus);add(hotBottomShotPlus);add(tHotBottomShot);
+			
+			tTopScoredNotHot = new JTextField("0",3);
+			tTopShotNotHot = new JTextField("0",3);
+			tBottomScoredNotHot = new JTextField("0",3);
+			tBottomShotNotHot = new JTextField("0",3);
+			tHotTopScored = new JTextField("0",3);
+			tHotBottomScored = new JTextField("0",3);
+		
+			  add(new JLabel("Top"));
+			  add(tTopScoredNotHot);
+			  
+			  add(new JLabel("/"));
+			  add(tTopShotNotHot);
+			  
+			  add(new JLabel("Bottom"));
+			  add(tBottomScoredNotHot);
+			  
+			  add(new JLabel("/"));
+			  add(tBottomShotNotHot);
+			  
+			  add(new JLabel("Top Hot"));
+			  add(tHotTopScored);
+			  
+			  add(new JLabel(""));add(new JLabel(""));
+
+			  add(new JLabel("Bottom Hot     "));
+			  add(tHotBottomScored);
+			  
+			  add(new JLabel(""));add(new JLabel(""));
+
 			  setLayout(new SpringLayout());
 			  SpringUtilities.makeCompactGrid(this, this.getComponentCount() / 4, 4,
 						0, 0, 0, 0);
@@ -217,54 +135,12 @@ public class AutonPanel extends JPanel {
 	}
 	class startingAndMobility extends JPanel{
 		
-		private MatchRecord mR = null;
-		
 		public startingAndMobility(){
 			Methods.addYNBG(this, "Mobility Points", "YES", "NO");
 			Methods.addYNBG(this, "Start Zone", "WHITE", "GOALIE");
 			setLayout(new SpringLayout());
 			 SpringUtilities.makeCompactGrid(this, this.getComponentCount() / 3, 3,
 						0, 0, 0, 0);
-		}
-		public startingAndMobility(MatchRecord r){
-			mR = r;
-			Methods.addYNBG(this, "Mobility Points", "YES", "NO");
-			Methods.addYNBG(this, "Start Zone", "WHITE", "GOALIE");
-			setLayout(new SpringLayout());
-			 SpringUtilities.makeCompactGrid(this, this.getComponentCount() / 3, 3,
-						0, 0, 0, 0);
-		}
-		private void setMobilityPoints(){
-			if( mR != null ){
-				startingAndMobility s = (startingAndMobility) getComponents()[2];
-				JRadioButton r1 = (JRadioButton)s.getComponents()[1];
-				JRadioButton r2 = (JRadioButton)s.getComponents()[2];
-				
-				if(this.mR.isMobility()){
-					r1.setSelected(true);
-					r2.setSelected(false);
-				}
-				else{
-					r2.setSelected(true);
-					r1.setSelected(false);
-				}	
-			}
-		}
-		private void setStartZone(){
-			if( mR != null ){	
-				startingAndMobility s = (startingAndMobility) getComponents()[2];
-				JRadioButton r1 = (JRadioButton)s.getComponents()[4];
-				JRadioButton r2 = (JRadioButton)s.getComponents()[5];
-				
-				if(this.mR.getStartingPosition()){
-					r1.setSelected(true);
-					r2.setSelected(false);
-				}
-				else{
-					r2.setSelected(true);
-					r1.setSelected(false);
-				}	
-			}
 		}
 	}
 

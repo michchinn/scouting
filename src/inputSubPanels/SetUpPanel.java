@@ -4,6 +4,8 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 
+import fullapp.Event;
+
 @SuppressWarnings("serial")
 public class SetUpPanel extends JPanel {
     
@@ -15,10 +17,15 @@ public class SetUpPanel extends JPanel {
     private ArrayList<String> teamNames;
     
     @SuppressWarnings("unchecked")
-	public SetUpPanel(ArrayList<Integer> teamNums,ArrayList<String> teamNames){
+	public SetUpPanel(Event e){
 
-    	this.teamNums = new ArrayList(teamNums);
-    	this.teamNames = new ArrayList(teamNames);
+    	this.teamNums = new ArrayList();
+    	this.teamNames = new ArrayList();
+    	
+    	for( int i = 0; i < e.getTeamList().size(); i++ ){
+    		teamNums.add(e.getTeamList().get(i).getNumber());
+    		teamNames.add(e.getTeamList().get(i).getName());
+    	}
     	
         num = new JComboBox(teamNums.toArray());
         

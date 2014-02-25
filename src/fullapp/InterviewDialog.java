@@ -6,6 +6,9 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -14,16 +17,15 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
-
-
-
-
+import javax.swing.SwingConstants;
 
 public class InterviewDialog extends JDialog{
 
-    private final TeamInfoPanel infoLine;
+    public final TeamInfoPanel infoLine;
     private final LengthWidthPanel LWLine;
     private final WeightPanel weightLine;
     private final NumberofWheelsPanel wheelsLine;
@@ -41,7 +43,46 @@ public class InterviewDialog extends JDialog{
     private final AutonGoalPanel autonGoalLine;
     private final AutonHotCheckPanel autonHotCheckLine;
     private final AutonScoredPanel autonScoredLine;
+    private final AutonComment autonComment;
+    private final GeneralComment generalComment;
     private final SubmitPanel submitLine;
+    
+    class AutonComment extends JPanel{
+    	
+    	private JTextArea autonCommentArea;
+    	
+    	public AutonComment(Interview interview){
+    		add(new JLabel("Auton Comment"));
+    		add(new JSeparator(SwingConstants.HORIZONTAL));
+    		autonCommentArea = new JTextArea(7,20);
+    		autonCommentArea.setLineWrap(true);
+    		if( interview.getAutonComment() != null || interview.getAutonComment() == "null" || interview.getAutonComment() != "" ){
+    			autonCommentArea.setText(interview.getAutonComment());
+    		}
+    		add(autonCommentArea);
+    	}
+    	public void submitData(Interview interview){
+    		interview.setAutonComment(autonCommentArea.getText());
+    	}
+    }
+    class GeneralComment extends JPanel{
+    	
+    	private JTextArea generalCommentArea;
+    	
+    	public GeneralComment(Interview interview){
+    		add(new JLabel("General Comment"));
+    		add(new JSeparator(SwingConstants.HORIZONTAL));
+    		generalCommentArea = new JTextArea(7,20);
+    		generalCommentArea.setLineWrap(true);
+    		if( interview.getGeneralComment() != null || interview.getGeneralComment() == "null" || interview.getGeneralComment() != "" ){
+    			generalCommentArea.setText(interview.getGeneralComment());
+    		}
+    		add(generalCommentArea);
+    	}
+    	public void submitData(Interview interview){
+    		interview.setGeneralComment(generalCommentArea.getText());
+    	}
+    }
 
     public InterviewDialog(Interview interview){
     	
@@ -63,45 +104,53 @@ public class InterviewDialog extends JDialog{
     	autonGoalLine = new AutonGoalPanel(interview);
       	autonHotCheckLine = new AutonHotCheckPanel(interview);
       	autonScoredLine = new AutonScoredPanel(interview);
+      	autonComment = new AutonComment(interview);
+      	generalComment = new GeneralComment(interview);
       	submitLine = new SubmitPanel(interview, this);
       
       	setDefaultCloseOperation(DISPOSE_ON_CLOSE); // default close op
       	setSize(400,700); // 
       	setVisible(true); // make it visible on screen
-      	setResizable(false); // not resizable
+      	setResizable(true); // not resizable
       
-      	
+      	JScrollPane mainPane = new JScrollPane();
+      	JPanel mainPanNoScroll = new JPanel();
+      	add(mainPane);
       	
       	if(Main.frame._eventTable.getSelectedRow() == -1)
       		infoLine.numberField.setText("0");
     	else
     		infoLine.numberField.setText(Integer.toString(Main.frame._currentEvent.getTeamList().get(Main.frame._eventTable.getSelectedRow()).getNumber()));
       	
-      	add(infoLine);
-      	add(LWLine);
-      	add(weightLine);
-      	add(wheelsLine);
-      	add(driveSystemLine);
-      	add(dropLine);
-      	add(speedLine);
-      	add(shooterTypeLine);
-      	add(trussCheckLine);
-      	add(goalsLine);
-      	add(ballsAquiredLine);
-      	add(intakeTypeLine);
-      	add(catcherTypeLine);
-      	add(autonCheckLine);
-      	add(startingPosLine);
-      	add(autonGoalLine);
-      	add(autonHotCheckLine);
-      	add(autonScoredLine);
-      	add(submitLine);
-      	setLayout(new GridLayout(19,1));
+      	mainPanNoScroll.add(infoLine);
+      	mainPanNoScroll.add(LWLine);
+      	mainPanNoScroll.add(weightLine);
+      	mainPanNoScroll.add(wheelsLine);
+      	mainPanNoScroll.add(driveSystemLine);
+      	mainPanNoScroll.add(dropLine);
+      	mainPanNoScroll.add(speedLine);
+      	mainPanNoScroll.add(shooterTypeLine);
+      	mainPanNoScroll.add(trussCheckLine);
+      	mainPanNoScroll.add(goalsLine);
+      	mainPanNoScroll.add(ballsAquiredLine);
+      	mainPanNoScroll.add(intakeTypeLine);
+      	mainPanNoScroll.add(catcherTypeLine);
+      	mainPanNoScroll.add(autonCheckLine);
+      	mainPanNoScroll.add(startingPosLine);
+      	mainPanNoScroll.add(autonGoalLine);
+      	mainPanNoScroll.add(autonHotCheckLine);
+      	mainPanNoScroll.add(autonScoredLine);
+      	mainPanNoScroll.add(autonComment);
+      	mainPanNoScroll.add(generalComment);
+      	mainPanNoScroll.add(submitLine);
+      	mainPanNoScroll.setLayout(new BoxLayout(mainPanNoScroll,BoxLayout.Y_AXIS));
+      	mainPane.setViewportView(mainPanNoScroll);
+      	add(mainPane);
     }
 
     
 
-    public void sendToInterview(Interview interview){
+    public void sendToInterview(Interview interview) throws IOException{
 
       infoLine.submitData(interview);
       LWLine.submitData(interview);
@@ -121,6 +170,9 @@ public class InterviewDialog extends JDialog{
       autonGoalLine.submitData(interview);
       autonHotCheckLine.submitData(interview);
       autonScoredLine.submitData(interview);
+      autonComment.submitData(interview);
+      generalComment.submitData(interview);
+      
       for( int index = 0; index < Main.frame._currentEvent.getTeamList().size(); index++){
     	  if(Main.frame._currentEvent.getTeamList().get(index).getNumber() == interview.getTeamNumber()){
     		  Main.frame._currentEvent.getTeamList().get(index).setInterview(interview);
@@ -128,6 +180,7 @@ public class InterviewDialog extends JDialog{
     	  }
       } 
       this.dispose();
+      Main.frame._currentEvent.saveToFile();
 }
 
 
@@ -160,7 +213,8 @@ class PressListener implements ActionListener{
         }
 
         public void actionPerformed(ActionEvent ae) {
-            interviewDialog.sendToInterview(interview);
+           try{interviewDialog.sendToInterview(interview);}
+           catch(Exception e){}
         }
 
 
@@ -730,74 +784,32 @@ class DropCenterWheelsCheckPanel extends JPanel{
 class SpeedPanel extends JPanel{
 
     JLabel speedLabel; // holds speed text
-
-    JLabel otherLabel; // holds "other" text
-
     JLabel ftSecLabel; // holds "ft / sec" text
-
     JTextField speedField; 
 
-    JTextField otherField;
-
     public SpeedPanel(Interview interview){
-
         speedLabel = new JLabel("Speed: ");
-
-        otherLabel = new JLabel("other ");
-
         ftSecLabel = new JLabel("ft/sec");
-
-        
-
         speedField = new JTextField("0",5);
-
-        otherField = new JTextField("0",5);
-
-        
-
         // fill in the current number if it was previously submitted 
-
+        System.out.println(interview.getSpeed());
          if(interview.getSpeed() != null)
             speedField.setText(interview.getSpeed());
 
         // add components to panel
-
         add(speedLabel);
-
         add(speedField);
-
         add(ftSecLabel);
-
-        add(otherLabel);
-
-        add(otherField);
-
-        
-
     }
 
     // changes the variables in an Interview Class so, effectively "sending in" the data.
 
     public void submitData(Interview interview ){
-
-        // if there is no other input.  Use the first box
-
-        if(otherField.getText() == null)
-
-            interview.setSpeed(speedField.getText());  // set the speed to the speedField's text and converts to an int.
-
-        else // but if the other box has crap in it, use that box.
-
-            interview.setSpeed(otherField.getText());  
-
+            interview.setSpeed(speedField.getText());
     }
-
 }
 
-
-
 //line 7
-
 class ShooterTypePanel extends JPanel{
 
     JLabel shooterTypeLabel;

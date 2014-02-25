@@ -46,6 +46,7 @@ public class TeamProfileWindow extends JPanel {
 		mainPanel.add(new PhotoPanel(t));
 		mainPanel.add(new CommentPane(t));
 		mainPanel.add(new AveragePane(t));
+//		mainPanel.add(new TotalAutonPointsGraphPanel(t));
 		
 		mainPanel.setLayout(new GridLayout(1,3));
 		add(mainPanel);

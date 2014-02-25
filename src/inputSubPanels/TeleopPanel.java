@@ -72,7 +72,7 @@ public class TeleopPanel extends JPanel{
 	}
 	public int getAcquisitionSpeed(){
 		for(int i = 0; i < 5; i++ ){
-			JRadioButton r = (JRadioButton)m_shootingRates.getComponent(i+13);
+			JRadioButton r = (JRadioButton)m_shootingRates.getComponent(i+19);
 			if(r.isSelected())
 				return i+1;
 		}
@@ -80,7 +80,7 @@ public class TeleopPanel extends JPanel{
 	}
 	public void setAcquisitionSpeed(int acquisitionSpeed){
 		if(acquisitionSpeed != 0){
-			JRadioButton b = (JRadioButton)m_shootingRates.getComponent(acquisitionSpeed+12);
+			JRadioButton b = (JRadioButton)m_shootingRates.getComponent(acquisitionSpeed+18);
 			b.setSelected(true);
 		}
 	}
@@ -126,8 +126,9 @@ class ShootingRates extends JPanel{
 	public ShootingRates(){
 		createButtonGroup(this,"Shooting Speed");
 		createButtonGroup(this,"Shooting Accuracy");
+		add(new JSeparator(SwingConstants.HORIZONTAL));add(new JLabel());add(new JLabel());add(new JLabel());add(new JLabel());add(new JLabel());
 		createButtonGroup(this,"Acquistion Speed");
 		setLayout(new SpringLayout());
-		SpringUtilities.makeCompactGrid(this,3,6,0,0,0,0);
+		SpringUtilities.makeCompactGrid(this,4,6,0,0,0,0);
 	}
 }

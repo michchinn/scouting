@@ -219,7 +219,7 @@ public class MatchRecordDialog extends JDialog{
 		m_generalInfoPanel.setPosition(r.getPosistionPlayed());
 		
 		m_teleopPanel.setTopTeleopScored(r.getTopTeleopScored());
-		m_teleopPanel.setTopTeleopShot(r.getTopTeleopScored());
+		m_teleopPanel.setTopTeleopShot(r.getTopTeleopShot());
 		m_teleopPanel.setBottomTeleopScored(r.getBottomTeleopScored());
 		m_teleopPanel.setBottomTeleopShot(r.getBottomTeleopShot());
 		m_teleopPanel.setShooterSpeed(r.getShootingSpeed());

@@ -24,13 +24,15 @@ public class Interview {
     String catcherType;
     String autonStartingPos;
     String autonGoals; 
+    String autonComment;
+    String generalComment;
     
     public Interview(int teamNumber, String teamName, int length, int width,
 			int weight, int numberOfWheels, String speed, int autonBallCount,
 			boolean canMakeTrussShots, boolean hasAuton, boolean targetHotGoal,
 			String hasDropCenterWheels, String driveSystem, String shooterType,
 			String generalGoals, String ballAquirySystem, String intakeType,
-			String catcherType, String autonStartingPos, String autonGoals) {
+			String catcherType, String autonStartingPos, String autonGoals, String autonComment, String generalComment) {
 		super();
 		this.teamNumber = teamNumber;
 		this.teamName = teamName;
@@ -52,6 +54,8 @@ public class Interview {
 		this.catcherType = catcherType;
 		this.autonStartingPos = autonStartingPos;
 		this.autonGoals = autonGoals;
+		this.autonComment = autonComment;
+		this.generalComment = generalComment;
 	}
 	// sets up defaults.
     public Interview(){
@@ -75,6 +79,8 @@ public class Interview {
         catcherType = "";
         autonStartingPos = "";
         autonGoals = "";
+        autonComment = "";
+        generalComment = "";
     }
 	public int getTeamNumber() {
 		return teamNumber;
@@ -195,6 +201,18 @@ public class Interview {
 	}
 	public void setAutonGoals(String autonGoals) {
 		this.autonGoals = autonGoals;
+	}
+	public String getAutonComment(){
+		return this.autonComment;
+	}
+	public void setAutonComment(String autonComment){
+		this.autonComment = autonComment;
+	}
+	public String getGeneralComment(){
+		return this.generalComment;
+	}
+	public void setGeneralComment(String generalComment){
+		this.generalComment = generalComment;
 	}
 }
 

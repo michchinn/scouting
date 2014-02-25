@@ -65,13 +65,15 @@ public class Event {
 				String catcherType = "" + interviewObj.get("catcherType");
 				String autonStartingPos = "" + interviewObj.get("autonStartingPos");
 				String autonGoals = "" + interviewObj.get("autonGoals");
+				String autonComment = "" + interviewObj.get("autonComment");
+				String generalComment = "" + interviewObj.get("generalComment");
 			
 				Interview interview = new Interview( teamNumber,  teamName,  length,  width,
 						 weight,  numberOfWheels,  speed,  autonBallCount,
 						 canMakeTrussShots,  hasAuton,  targetHotGoal,
 						 hasDropCenterWheels,  driveSystem,  shooterType,
 						 generalGoals,  ballAquirySystem,  intakeType,
-						 catcherType,  autonStartingPos,  autonGoals);
+						 catcherType,  autonStartingPos,  autonGoals, autonComment, generalComment);
 				_teamList.get(i).setInterview(interview);
 				
 				JSONArray matchRecordsArray = (JSONArray) teamObject.get("matchRecords");
@@ -237,7 +239,8 @@ public class Event {
 			interviewObj.put("catcherType", in.getCatcherType());
 			interviewObj.put("autonStartingPos", in.getAutonStartingPos());
 			interviewObj.put("autonGoals",in.getAutonGoals());
-			
+			interviewObj.put("autonComment",in.getAutonComment());
+			interviewObj.put("generalComment",in.getGeneralComment());
 			
 			teamObj.put("interview", interviewObj);
 			

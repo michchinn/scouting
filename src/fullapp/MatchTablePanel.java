@@ -71,7 +71,7 @@ public class MatchTablePanel extends JPanel{
 		_matchRecordTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		_matchRecordTable.getSelectionModel().addListSelectionListener((ListSelectionListener) new MatchRecordTableSelectionListener());
 		_matchRecordTable.setShowHorizontalLines(true);
-		_matchRecordTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		_matchRecordTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		tablePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		tablePanel.setOpaque(false);
 		tablePanel.setViewportView(_matchRecordTable);

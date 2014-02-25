@@ -480,16 +480,21 @@ public class MatchRecord{
 	}
 	public double getTopShootingPercentage(){
 		double avg = 0.0;
+//		System.out.println(this.getTopTeleopScored() + " " + this.getTopTeleopShot() + " " + (double)this.getTopTeleopScored()/this.getTopTeleopShot());
 		try{
-			avg += (this.getTopTeleopScored())/(this.getTopTeleopShot());
+			avg += ((double)this.getTopTeleopScored())/(this.getTopTeleopShot());
+//			System.out.println(avg);
 		}
-		catch(ArithmeticException e){}
+		catch(ArithmeticException e){
+			e.printStackTrace();
+//			System.out.println("CAUGHT");
+		}
 		return avg;
 	}
 	public double getBottomShootingPercentage(){
 		double avg = 0.0;
 		try{
-			avg += (this.getBottomTeleopScored())/(this.getBottomTeleopShot());
+			avg += ((double)this.getBottomTeleopScored())/(this.getBottomTeleopShot());
 		}
 		catch(ArithmeticException e){}
 		return avg;

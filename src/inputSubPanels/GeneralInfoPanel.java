@@ -17,14 +17,14 @@ public class GeneralInfoPanel extends JPanel {
     public GeneralInfoPanel(){
         
         position = new JComboBox(positions);
+       add(position);add(new JLabel());add(new JLabel());
+        add(new JLabel());add(new JLabel()); add(new JLabel());
         Methods.createButtonGroup(this,"Driver Ability");//0,1,2,3,4,5
         Methods.createButtonGroup(this,"Speed");//6,7,8,9,10,11
         Methods.createButtonGroup(this,"Maneuverability");//12,13,14,15,16,17
         Methods.createButtonGroup(this,"Stability");//18,19,20,21,22,23
         Methods.createButtonGroup(this,"Pushing Ability");      
-        add(position);
-        add(new JLabel());add(new JLabel());add(new JLabel());
-        add(new JLabel());add(new JLabel());
+
         
         //setBackground(fullapp.EventOverviewWindow.daisyLightBlue);
         

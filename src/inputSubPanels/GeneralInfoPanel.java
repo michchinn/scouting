@@ -47,13 +47,13 @@ public class GeneralInfoPanel extends JPanel {
     }
     public void setDriverAbility(int driverAbility){
     	if(driverAbility != 0){
-    		JRadioButton b = (JRadioButton)this.getComponent(driverAbility);
+    		JRadioButton b = (JRadioButton)this.getComponent(driverAbility + 6);
     		b.setSelected(true);
     	}
     }
     public int getSpeed(){
     	for( int i = 0; i < 5; i++ ){
-    		JRadioButton b = (JRadioButton)this.getComponent(i+7);
+    		JRadioButton b = (JRadioButton)this.getComponent(i+7 + 6);
     		if(b.isSelected())
     			return i + 1;
     	}
@@ -61,13 +61,13 @@ public class GeneralInfoPanel extends JPanel {
     }
     public void setSpeed(int speed){
     	if(speed != 0){
-    		JRadioButton b = (JRadioButton)this.getComponent(speed+6);
+    		JRadioButton b = (JRadioButton)this.getComponent(speed+6 + 6);
     		b.setSelected(true);
     	}
     }
     public int getManeuverability(){
     	for( int i = 0; i < 5; i++ ){
-    		JRadioButton b = (JRadioButton)this.getComponent(i+13);
+    		JRadioButton b = (JRadioButton)this.getComponent(i+13 + 6);
     		if(b.isSelected())
     			return i + 1;
     	}
@@ -75,13 +75,13 @@ public class GeneralInfoPanel extends JPanel {
     }
     public void setManeuverability(int maneuverability){
     	if(maneuverability != 0){
-    		JRadioButton b = (JRadioButton)this.getComponent(maneuverability+12);
+    		JRadioButton b = (JRadioButton)this.getComponent(maneuverability + 6+12);
     		b.setSelected(true);
     	}
     }
     public int getStability(){
     	for( int i = 0; i < 5; i++ ){
-    		JRadioButton b = (JRadioButton)this.getComponent(i+19);
+    		JRadioButton b = (JRadioButton)this.getComponent(i+19 + 6);
     		if(b.isSelected())
     			return i + 1;
     	}
@@ -89,13 +89,13 @@ public class GeneralInfoPanel extends JPanel {
     }
     public void setStability(int stability){
     	if(stability != 0){
-    		JRadioButton b = (JRadioButton)this.getComponent(stability+18);
+    		JRadioButton b = (JRadioButton)this.getComponent(stability+18 + 6);
     		b.setSelected(true);
     	}
     }
     public int getPushingAbility(){
     	for( int i = 0; i < 5; i++ ){
-    		JRadioButton b = (JRadioButton)this.getComponent(i+25);
+    		JRadioButton b = (JRadioButton)this.getComponent(i+25 + 6);
     		if(b.isSelected())
     			return i + 1;
     	}
@@ -103,7 +103,7 @@ public class GeneralInfoPanel extends JPanel {
     }
     public void setPushingAbility(int pushingAbility){
     	if(pushingAbility != 0){
-    		JRadioButton b = (JRadioButton)this.getComponent(pushingAbility+24);
+    		JRadioButton b = (JRadioButton)this.getComponent(pushingAbility+24 + 6);
     		b.setSelected(true);
     	}
     }

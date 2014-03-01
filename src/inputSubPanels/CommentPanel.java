@@ -4,7 +4,6 @@ package inputSubPanels;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;

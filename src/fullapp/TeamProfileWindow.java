@@ -1,5 +1,9 @@
 package fullapp;
 
+import inputSubPanels.SpringUtilities;
+
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -9,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,10 +25,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
+import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+
+import fullapp.TeamInterviewPanel.AutonInterview.IAutonNoComment;
 	
 @SuppressWarnings("serial")
 public class TeamProfileWindow extends JPanel {
@@ -46,9 +55,12 @@ public class TeamProfileWindow extends JPanel {
 		mainPanel.add(new PhotoPanel(t));
 		mainPanel.add(new CommentPane(t));
 		mainPanel.add(new AveragePane(t));
+		mainPanel.add(new JLabel());
+		mainPanel.add(new JLabel());
+		mainPanel.add(new JLabel());
 //		mainPanel.add(new TotalAutonPointsGraphPanel(t));
 		
-		mainPanel.setLayout(new GridLayout(1,3));
+		mainPanel.setLayout(new GridLayout(2,3));
 		add(mainPanel);
 		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 	}
@@ -135,22 +147,34 @@ class CommentPane extends JTabbedPane{
 	}
 }
 class AveragePane extends JPanel{
-	
+	class AverageData extends JPanel{
+		
+		public AverageData(Team t){
+			add(new JLabel("Avg. Driver Ability"));add(new JLabel(Double.toString(t.getAverageDriverAbility())));
+			add(new JLabel("Avg. Speed"));add(new JLabel(Double.toString(t.getAverageSpeed())));
+			add(new JLabel("Avg. Maneuverability"));add(new JLabel(Double.toString(t.getAverageManeuverability())));
+			add(new JLabel("Avg. Stability"));add(new JLabel(Double.toString(t.getAverageStability())));
+			add(new JLabel("Avg. Pushing Ability"));add(new JLabel(Double.toString(t.getAveragePushingAbility())));
+			setLayout(new GridLayout(9,2));
+		}
+	}
 	public AveragePane(Team t){
-		add(new JLabel("Avg. Driver Ability"));add(new JLabel(Double.toString(t.getAverageDriverAbility())));
-		add(new JSeparator(SwingConstants.HORIZONTAL));add(new JLabel());
-		add(new JLabel("Avg. Speed"));add(new JLabel(Double.toString(t.getAverageSpeed())));
-		add(new JSeparator(SwingConstants.HORIZONTAL));add(new JLabel());
-		add(new JLabel("Avg. Maneuverability"));add(new JLabel(Double.toString(t.getAverageManeuverability())));
-		add(new JSeparator(SwingConstants.HORIZONTAL));add(new JLabel());
-		add(new JLabel("Avg. Stability"));add(new JLabel(Double.toString(t.getAverageStability())));
-		add(new JSeparator(SwingConstants.HORIZONTAL));add(new JLabel());
-		add(new JLabel("Avg. Pushing Ability"));add(new JLabel(Double.toString(t.getAveragePushingAbility())));
-		setLayout(new GridLayout(9,2));
-		//inputSubPanels.SpringUtilities.makeCompactGrid(this, 9, 2, 0, 0, 0, 0);
-		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		JSeparator blackHorizontal = new JSeparator(SwingConstants.HORIZONTAL);
+		blackHorizontal.setForeground(Color.BLACK);
+		JLabel titleLabel = new JLabel("Averages");
+		titleLabel.setFont(new Font(Font.SERIF,Font.BOLD,titleLabel.getFont().getSize()+5));
+		titleLabel.setAlignmentX(CENTER_ALIGNMENT);
+		add(titleLabel);
+		add(blackHorizontal);
+		add(new AverageData(t));
+		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+		Border line = BorderFactory.createLineBorder(Color.BLACK);
+		Border empty = BorderFactory.createEmptyBorder(10, 10, 10, 10);
+		Border firstCombine = BorderFactory.createCompoundBorder(empty,line);
+		setBorder(BorderFactory.createCompoundBorder(firstCombine,empty));
 	}
 }
+
 @SuppressWarnings("serial")
 class UploadButton2 extends JButton implements ActionListener {
 

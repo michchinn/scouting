@@ -29,4 +29,5 @@ public class TabbedProfileWindow extends JTabbedPane {
 	public int getTeamNumber(){
 		return teamNumber;
 	}
+
 }

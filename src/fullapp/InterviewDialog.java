@@ -2,6 +2,7 @@ package fullapp;
 
 
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -83,6 +84,14 @@ public class InterviewDialog extends JDialog{
     		interview.setGeneralComment(generalCommentArea.getText());
     	}
     }
+    class BlackHor extends JSeparator{
+    	
+    	public BlackHor(){
+    		super(SwingConstants.HORIZONTAL);
+    		setForeground(Color.BLACK);
+    	}
+    	
+    }
 
     public InterviewDialog(Interview interview){
     	
@@ -109,7 +118,7 @@ public class InterviewDialog extends JDialog{
       	submitLine = new SubmitPanel(interview, this);
       
       	setDefaultCloseOperation(DISPOSE_ON_CLOSE); // default close op
-      	setSize(400,700); // 
+      	setSize(500,600); // 
       	setVisible(true); // make it visible on screen
       	setResizable(true); // not resizable
       
@@ -123,25 +132,31 @@ public class InterviewDialog extends JDialog{
     		infoLine.numberField.setText(Integer.toString(Main.frame._currentEvent.getTeamList().get(Main.frame._eventTable.getSelectedRow()).getNumber()));
       	
       	mainPanNoScroll.add(infoLine);
+      	mainPanNoScroll.add(new BlackHor());
       	mainPanNoScroll.add(LWLine);
       	mainPanNoScroll.add(weightLine);
       	mainPanNoScroll.add(wheelsLine);
       	mainPanNoScroll.add(driveSystemLine);
       	mainPanNoScroll.add(dropLine);
       	mainPanNoScroll.add(speedLine);
+    	mainPanNoScroll.add(new BlackHor());
       	mainPanNoScroll.add(shooterTypeLine);
       	mainPanNoScroll.add(trussCheckLine);
       	mainPanNoScroll.add(goalsLine);
+    	mainPanNoScroll.add(new BlackHor());
       	mainPanNoScroll.add(ballsAquiredLine);
       	mainPanNoScroll.add(intakeTypeLine);
       	mainPanNoScroll.add(catcherTypeLine);
+    	mainPanNoScroll.add(new BlackHor());
       	mainPanNoScroll.add(autonCheckLine);
       	mainPanNoScroll.add(startingPosLine);
       	mainPanNoScroll.add(autonGoalLine);
       	mainPanNoScroll.add(autonHotCheckLine);
       	mainPanNoScroll.add(autonScoredLine);
       	mainPanNoScroll.add(autonComment);
+    	mainPanNoScroll.add(new BlackHor());
       	mainPanNoScroll.add(generalComment);
+    	mainPanNoScroll.add(new BlackHor());
       	mainPanNoScroll.add(submitLine);
       	mainPanNoScroll.setLayout(new BoxLayout(mainPanNoScroll,BoxLayout.Y_AXIS));
       	mainPane.setViewportView(mainPanNoScroll);
@@ -152,7 +167,8 @@ public class InterviewDialog extends JDialog{
 
     public void sendToInterview(Interview interview) throws IOException{
 
-      infoLine.submitData(interview);
+     try{
+    	 infoLine.submitData(interview);
       LWLine.submitData(interview);
       weightLine.submitData(interview);
       wheelsLine.submitData(interview);
@@ -181,6 +197,11 @@ public class InterviewDialog extends JDialog{
       } 
       this.dispose();
       Main.frame._currentEvent.saveToFile();
+     }
+     catch(Exception e){
+    	 javax.swing.JOptionPane.showMessageDialog(null, "There was an error","ERROR",javax.swing.JOptionPane.ERROR_MESSAGE);
+    	 return;
+     }
 }
 
 

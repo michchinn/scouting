@@ -101,7 +101,7 @@ public class EventOverviewWindow extends JFrame {
 		
 		public void actionPerformed(ActionEvent arg0) {
 			InterviewDialog d = new InterviewDialog(new Interview()); 
-			d.pack();
+//			d.pack();
 			d.setVisible(true);
 		}
 		

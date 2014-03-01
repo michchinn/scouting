@@ -29,18 +29,23 @@ public class Methods {
     public static void clearAndResetText(final JTextComponent t, final String label){
         t.addMouseListener(new MouseListener(){
 
-            public void mouseClicked(MouseEvent e) {}
+            @Override
+			public void mouseClicked(MouseEvent e) {}
 
-            public void mousePressed(MouseEvent e) {}
+            @Override
+			public void mousePressed(MouseEvent e) {}
 
-            public void mouseReleased(MouseEvent e) {}
+            @Override
+			public void mouseReleased(MouseEvent e) {}
 
-            public void mouseEntered(MouseEvent e) {
+            @Override
+			public void mouseEntered(MouseEvent e) {
                 if(t.getText().equals(label))
                     t.setText("");
             }
 
-            public void mouseExited(MouseEvent e) {
+            @Override
+			public void mouseExited(MouseEvent e) {
                 if( t.getText().equals("") || (t.getText().equals(" ") && t.getCaret() == null)){
                     t.setText(label);
                 }

@@ -4,7 +4,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.Vector;
 
 public class MatchRecordTableModel extends AbstractTableModel{
-	private String[] _columnNames = {"Match #","Auton. High","Auton. Hot High","Auton. Score", "# Teleop High","# Teleop Low","Teleop Top Acc.", "Catches", "Trusses","Teleop Score","Possessions", "Play Style"};
+	private String[] _columnNames = {"Match #","Auton. High","Auton. Hot High","Auton. Score", "# Teleop High","# Teleop Low","Teleop Top Acc.", "Catches", "Trusses","Teleop Score","Possessions", "Play Style","Scout Name"};
 	private Team _team;
 
 	public Object getValueAt(int row, int col) {
@@ -23,6 +23,7 @@ public class MatchRecordTableModel extends AbstractTableModel{
 			case 9: return record.getTeleopPoints();
 			case 10: return record.getPossessions();			
 			case 11: return record.getPosistionPlayed();
+			case 12: return record.getScoutName();
 		}
 		return null;
 	}

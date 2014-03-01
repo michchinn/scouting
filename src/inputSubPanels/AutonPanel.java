@@ -1,7 +1,5 @@
 package inputSubPanels;
 
-import java.awt.Color;
-
 import javax.swing.*;
 
 import fullapp.MatchRecord;

@@ -24,7 +24,6 @@ public class TeamInterviewPanel extends JPanel {
 			addActionListener(this);
 		}
 		
-		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			_interview.setTeamNumber(team.getNumber());
 			editingIntDialog = new InterviewDialog(_interview);

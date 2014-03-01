@@ -32,14 +32,16 @@ public class SetUpPanel extends JPanel {
         name = new JComboBox(teamNames.toArray());
         
         num.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
+            @Override
+			public void actionPerformed(ActionEvent e) {
                 name.setSelectedIndex(num.getSelectedIndex());
             }
         });
         
         name.addActionListener(new ActionListener(){
 
-            public void actionPerformed(ActionEvent e) {
+            @Override
+			public void actionPerformed(ActionEvent e) {
                 num.setSelectedIndex(name.getSelectedIndex());
             }
         });

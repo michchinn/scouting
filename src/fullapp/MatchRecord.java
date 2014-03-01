@@ -449,10 +449,10 @@ public class MatchRecord{
 	public int getAutonPoints(){
 			int autonPoints = 0;
 			
-			autonPoints += 6 * this.getBottomAutonScored() - this.getBottomHot();
+			autonPoints += 6 * (this.getBottomAutonScored() - this.getBottomHot());
 			autonPoints += 11 * this.getBottomHot();
 			
-			autonPoints += 15 * this.getTopAutonScored() - this.getTopHot();
+			autonPoints += 15 * (this.getTopAutonScored() - this.getTopHot());
 			autonPoints += 20 * this.getTopHot();
 			
 			if(this.isMobilityPoints())
@@ -465,7 +465,7 @@ public class MatchRecord{
 		teleopPoints += this.getTopTeleopScored() * 10;
 		teleopPoints += this.getBottomTeleopScored();
 		teleopPoints += this.getTrussThrowsComplete() * 10;
-		teleopPoints += this.getPassesComplete() * 10;
+//		teleopPoints += this.getPassesComplete() * 10;
 		teleopPoints += this.getCatchesComplete() * 10;
 		
 		return teleopPoints;

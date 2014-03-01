@@ -1,7 +1,5 @@
 package inputSubPanels;
 
-import java.awt.Component;
-
 import javax.swing.*;
 
 /**
@@ -39,7 +37,7 @@ public class GeneralInfoPanel extends JPanel {
     }   
     public int getDriverAbility(){
     	for( int i = 0; i < 5; i++ ){
-    		JRadioButton b = (JRadioButton)this.getComponent(i+1);
+    		JRadioButton b = (JRadioButton)this.getComponent(i+1+6);
     		if(b.isSelected())
     			return i + 1;
     	}
@@ -75,7 +73,7 @@ public class GeneralInfoPanel extends JPanel {
     }
     public void setManeuverability(int maneuverability){
     	if(maneuverability != 0){
-    		JRadioButton b = (JRadioButton)this.getComponent(maneuverability + 6+12);
+    		JRadioButton b = (JRadioButton)this.getComponent(maneuverability + 6+12+6);
     		b.setSelected(true);
     	}
     }

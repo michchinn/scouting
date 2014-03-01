@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+<<<<<<< HEAD
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+=======
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+>>>>>>> f4b43e63daed99b4f0037b3897122d9a756530a7
 	<classpathentry kind="lib" path="C:/Users/17mchinn/Desktop/2013ScoutingProgram-2014-02-04/2013ScoutingProgram/lib/commons-io-2.4.jar"/>
 	<classpathentry kind="lib" path="C:/Users/17mchinn/Desktop/2013ScoutingProgram-2014-02-04/2013ScoutingProgram/lib/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/michael/Downloads/Kristian&apos;s Scouting Program/2013ScoutingProgram/lib/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/michael/Downloads/Kristian&apos;s Scouting Program/2013ScoutingProgram/lib/commons-io-2.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,20 +1,21 @@
 package fullapp;
 
 public class Interview {
+	
     int teamNumber;
     String teamName;
+    String orientation;
     
-    int length;
-    int width;
-    int weight;
+    int driveMotorsNum;
+    double weight;
     int numberOfWheels;
-    String speed;
     int autonBallCount;
     
     boolean canMakeTrussShots;
     boolean hasAuton;
     boolean targetHotGoal;
     
+    String driveMotorsType;
     String hasDropCenterWheels;
     String driveSystem;
     String shooterType;
@@ -23,28 +24,55 @@ public class Interview {
     String intakeType;
     String catcherType;
     String autonStartingPos;
-    String autonGoals; 
-    String autonComment;
-    String generalComment;
+    String autonGoals;
     
-    public Interview(int teamNumber, String teamName, int length, int width,
-			int weight, int numberOfWheels, String speed, int autonBallCount,
-			boolean canMakeTrussShots, boolean hasAuton, boolean targetHotGoal,
+    // sets up defaults.
+    public Interview(){
+    	int teamNumber = 0;
+        String teamName = "";
+        String orientation = "";
+        
+        int driveMotorsNum = 0;
+        double weight = 0.0;
+        int numberOfWheels = 0;
+        int autonBallCount = 0;
+        
+        boolean canMakeTrussShots = false;
+        boolean hasAuton = false;
+        boolean targetHotGoal = false;
+        
+        String driveMotorsType = "";
+        String hasDropCenterWheels = "";
+        String driveSystem = "";
+        String shooterType = "";
+        String generalGoals = "";
+        String ballAquirySystem = "";
+        String intakeType = "";
+        String catcherType = "";
+        String autonStartingPos = "";
+        String autonGoals = "";
+    }
+    
+
+    public Interview(int teamNumber, String teamName, String orientation,
+			int driveMotorsNum, double weight, int numberOfWheels,
+			int autonBallCount, boolean canMakeTrussShots, boolean hasAuton,
+			boolean targetHotGoal, String driveMotorsType,
 			String hasDropCenterWheels, String driveSystem, String shooterType,
 			String generalGoals, String ballAquirySystem, String intakeType,
-			String catcherType, String autonStartingPos, String autonGoals, String autonComment, String generalComment) {
+			String catcherType, String autonStartingPos, String autonGoals) {
 		super();
 		this.teamNumber = teamNumber;
 		this.teamName = teamName;
-		this.length = length;
-		this.width = width;
+		this.orientation = orientation;
+		this.driveMotorsNum = driveMotorsNum;
 		this.weight = weight;
 		this.numberOfWheels = numberOfWheels;
-		this.speed = speed;
 		this.autonBallCount = autonBallCount;
 		this.canMakeTrussShots = canMakeTrussShots;
 		this.hasAuton = hasAuton;
 		this.targetHotGoal = targetHotGoal;
+		this.driveMotorsType = driveMotorsType;
 		this.hasDropCenterWheels = hasDropCenterWheels;
 		this.driveSystem = driveSystem;
 		this.shooterType = shooterType;
@@ -54,166 +82,145 @@ public class Interview {
 		this.catcherType = catcherType;
 		this.autonStartingPos = autonStartingPos;
 		this.autonGoals = autonGoals;
-		this.autonComment = autonComment;
-		this.generalComment = generalComment;
 	}
-	// sets up defaults.
-    public Interview(){
-        teamNumber = 0;
-        teamName = "";   
-        length = 0;
-        width = 0;
-        weight = 0;
-        numberOfWheels = 0;
-        speed = "";
-        autonBallCount = 0;
-        canMakeTrussShots = false;
-        hasAuton = false;
-        targetHotGoal = false;
-        hasDropCenterWheels = "";
-        driveSystem = "";
-        shooterType = "";
-        generalGoals = "";
-        ballAquirySystem = "";
-        intakeType = "";
-        catcherType = "";
-        autonStartingPos = "";
-        autonGoals = "";
-        autonComment = "";
-        generalComment = "";
+
+
+	// Standard geters and seters
+    public String getOrientation(){
+        return orientation;
     }
-	public int getTeamNumber() {
-		return teamNumber;
-	}
-	public void setTeamNumber(int teamNumber) {
-		this.teamNumber = teamNumber;
-	}
-	public String getTeamName() {
-		return teamName;
-	}
-	public void setTeamName(String teamName) {
-		this.teamName = teamName;
-	}
-	public int getLength() {
-		return length;
-	}
-	public void setLength(int length) {
-		this.length = length;
-	}
-	public int getWidth() {
-		return width;
-	}
-	public void setWidth(int width) {
-		this.width = width;
-	}
-	public int getWeight() {
-		return weight;
-	}
-	public void setWeight(int weight) {
-		this.weight = weight;
-	}
-	public int getNumberOfWheels() {
-		return numberOfWheels;
-	}
-	public void setNumberOfWheels(int numberOfWheels) {
-		this.numberOfWheels = numberOfWheels;
-	}
-	public String getSpeed() {
-		return speed;
-	}
-	public void setSpeed(String speed) {
-		this.speed = speed;
-	}
-	public int getAutonBallCount() {
-		return autonBallCount;
-	}
-	public void setAutonBallCount(int autonBallCount) {
-		this.autonBallCount = autonBallCount;
-	}
-	public boolean isCanMakeTrussShots() {
-		return canMakeTrussShots;
-	}
-	public void setCanMakeTrussShots(boolean canMakeTrussShots) {
-		this.canMakeTrussShots = canMakeTrussShots;
-	}
-	public boolean isHasAuton() {
-		return hasAuton;
-	}
-	public void setHasAuton(boolean hasAuton) {
-		this.hasAuton = hasAuton;
-	}
-	public boolean isTargetHotGoal() {
-		return targetHotGoal;
-	}
-	public void setTargetHotGoal(boolean targetHotGoal) {
-		this.targetHotGoal = targetHotGoal;
-	}
-	public String getHasDropCenterWheels() {
-		return hasDropCenterWheels;
-	}
-	public void setHasDropCenterWheels(String hasDropCenterWheels) {
-		this.hasDropCenterWheels = hasDropCenterWheels;
-	}
-	public String getDriveSystem() {
-		return driveSystem;
-	}
-	public void setDriveSystem(String driveSystem) {
-		this.driveSystem = driveSystem;
-	}
-	public String getShooterType() {
-		return shooterType;
-	}
-	public void setShooterType(String shooterType) {
-		this.shooterType = shooterType;
-	}
-	public String getGeneralGoals() {
-		return generalGoals;
-	}
-	public void setGeneralGoals(String generalGoals) {
-		this.generalGoals = generalGoals;
-	}
-	public String getBallAquirySystem() {
-		return ballAquirySystem;
-	}
-	public void setBallAquirySystem(String ballAquirySystem) {
-		this.ballAquirySystem = ballAquirySystem;
-	}
-	public String getIntakeType() {
-		return intakeType;
-	}
-	public void setIntakeType(String intakeType) {
-		this.intakeType = intakeType;
-	}
-	public String getCatcherType() {
-		return catcherType;
-	}
-	public void setCatcherType(String catcherType) {
-		this.catcherType = catcherType;
-	}
-	public String getAutonStartingPos() {
-		return autonStartingPos;
-	}
-	public void setAutonStartingPos(String autonStartingPos) {
-		this.autonStartingPos = autonStartingPos;
-	}
-	public String getAutonGoals() {
-		return autonGoals;
-	}
-	public void setAutonGoals(String autonGoals) {
-		this.autonGoals = autonGoals;
-	}
-	public String getAutonComment(){
-		return this.autonComment;
-	}
-	public void setAutonComment(String autonComment){
-		this.autonComment = autonComment;
-	}
-	public String getGeneralComment(){
-		return this.generalComment;
-	}
-	public void setGeneralComment(String generalComment){
-		this.generalComment = generalComment;
-	}
+    public void setOrientation(String newOrientation){
+        orientation = newOrientation;
+    }
+    public String getDriveMotorsType(){
+        return driveMotorsType;
+    }
+    public void setDriveMotorsType(String newDriveMotorsType){
+        driveMotorsType = newDriveMotorsType;
+    }
+    public int getDriveMotorsNum(){
+        return driveMotorsNum;
+    }
+    public void setDriveMotorsNum(int newNumDriveMotors){
+        driveMotorsNum = newNumDriveMotors;
+    }
+    public double getWeight(){
+        return weight;
+    }
+    public void setWeight(String newWeight){
+        weight = Double.parseDouble(newWeight);
+    }
+    public void setWeight(double newWeight){
+        weight = newWeight;
+    }
+    public int getNumberOfWheels(){
+        return numberOfWheels;
+    }
+    public void setNumberOfWheels(int newNumberOfWheels){
+        numberOfWheels = newNumberOfWheels;
+    }
+    public int getAutonBallCount(){
+        return autonBallCount;
+    }
+    public void setAutonBallCount(int newAutonBallCount){
+        autonBallCount = newAutonBallCount;
+    }
+    public String getHasDropCenterWheels(){
+        return hasDropCenterWheels;
+    }  
+    public void setHasDropCenterWheels(String newHasDropCenterWheels){
+        hasDropCenterWheels = newHasDropCenterWheels;
+    }
+    public boolean getCanMakeTrussShots(){
+        return canMakeTrussShots;
+    }   
+    public void setCanMakeTrussShots(boolean newCanMakeTrussShots){
+        canMakeTrussShots = newCanMakeTrussShots;
+    }
+    public boolean getHasAuton(){
+        return hasAuton;
+    } 
+    public void setHasAuton(boolean newHasAuton){
+        hasAuton = newHasAuton;
+    }     
+    public boolean getTargetHotGoal(){
+        return targetHotGoal;
+    }  
+    public void setTargetHotGoal(boolean newTargetHotGoal){
+        targetHotGoal = newTargetHotGoal;
+    }
+    public String getDriveSystem(){
+        return driveSystem;
+    }  
+    public void setDriveSystem(String newDriveSystem){
+        driveSystem = newDriveSystem;
+    }
+    public String getShooterType(){
+        return shooterType;
+    } 
+    public void setShooterType(String newShooterType){
+        shooterType = newShooterType;
+    }
+    public String getGeneralGoals(){
+        return generalGoals;
+    } 
+    public void setGeneralGoals(String newGeneralGoals){
+        generalGoals = newGeneralGoals;
+    }
+    public String getBallAquirySystem(){
+        return ballAquirySystem;
+    } 
+    public void setBallAquirySystem(String newBallAquirySystem){
+        ballAquirySystem = newBallAquirySystem;
+    }
+    // used to build on the ball aquiry system  because it has multiple options
+    public void addToBallAquirySystem(String addition){
+        // check if there are contents already
+        if(getBallAquirySystem() != null){
+            ballAquirySystem += " and ";  // if so add an and connector
+            ballAquirySystem += addition;
+        }
+        // if there is not simply make the value into the addition
+        else{
+            setBallAquirySystem(addition);
+        }
+    }
+    public String getIntakeType(){
+        return intakeType;
+    } 
+    public void setIntakeType(String newIntakeType){
+        intakeType = newIntakeType;
+    }
+    public String getCatcherType(){
+        return catcherType;
+    }  
+    public void setCatcherType(String newCatcherType){
+        catcherType = newCatcherType;
+    }
+    public String getAutonStartingPos(){
+        return autonStartingPos;
+    } 
+    public void setAutonStartingPos(String newAutonStartingPos){
+        autonStartingPos = newAutonStartingPos;
+    }
+    public String getAutonGoals(){
+        return autonGoals;
+    } 
+    public void setAutonGoals(String newAutonGoals){
+        autonGoals = newAutonGoals;
+    }
+    public String getTeamName() {
+        return teamName;
+    }
+    public void setTeamName(String newTeamName){
+        teamName = newTeamName;
+    }
+    public int getTeamNumber(){
+    	return teamNumber;
+    }
+    public void setTeamNumber(int newTeamNumber){
+        teamNumber = newTeamNumber;
+    }
 }
 
 //

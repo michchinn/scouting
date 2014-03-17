@@ -4,7 +4,6 @@ import javax.swing.*;
 
 public class AssistPanel extends JPanel {
 
-	private JTextField possessionsText;
 	private JTextField successfulPassesText;
 	private JTextField totalPassesText;
 	private JTextField successfulTrussThrowsText;
@@ -13,8 +12,7 @@ public class AssistPanel extends JPanel {
 	private JTextField totalCatchesText;
 	
 	public AssistPanel(){ 		  
-		
-		possessionsText = new JTextField("0",3);
+
 		successfulPassesText = new JTextField("0",3);
 		totalPassesText = new JTextField("0",3);
 		successfulTrussThrowsText = new JTextField("0",3);
@@ -22,12 +20,6 @@ public class AssistPanel extends JPanel {
 		successfulCatchesText = new JTextField("0",3);
 		totalCatchesText = new JTextField("0",3);
 		
-		  add(new JLabel("Possessions      "));
-		  add(possessionsText);
-		  
-		  add(new JLabel());
-		  add(new JLabel());
-		  
 		  add(new JLabel("Passes"));
 		  add(successfulPassesText);
 		  
@@ -49,12 +41,6 @@ public class AssistPanel extends JPanel {
 		  setLayout(new SpringLayout());
 		  SpringUtilities.makeCompactGrid(this, this.getComponentCount() / 4, 4,
 					0, 0, 0, 0);
-	}
-	public int getPossessions(){
-		return Integer.parseInt(possessionsText.getText());
-	}
-	public void setPossessions(int possessions){
-		possessionsText.setText(Integer.toString(possessions));
 	}
 	public int getPassesComplete(){
 		return Integer.parseInt(successfulPassesText.getText());

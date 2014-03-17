@@ -1,13 +1,9 @@
 package fullapp;
 
-import java.io.IOException;
-
 import javax.swing.InputMap;
 import javax.swing.JFrame;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
-
-import org.json.simple.parser.ParseException;
 
 public class Main {
 	

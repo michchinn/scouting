@@ -33,6 +33,7 @@ public class GraphPanel extends JPanel {
 		setPreferredSize(new Dimension(600, 250));
 	}
 
+	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		

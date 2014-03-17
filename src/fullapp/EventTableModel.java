@@ -2,13 +2,13 @@ package fullapp;
 
 import javax.swing.table.AbstractTableModel;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class EventTableModel extends AbstractTableModel{
 	private String[] _columnNames = {"Team #", "Avg. Pts/Match", "Avg. Auton. Pts.", "Avg. Teleop. Pts.", "Avg. Top Acc","Number of Matches"};
 	private ArrayList<Team> _data = new ArrayList<Team>();
 	
+	@Override
 	public Class<?> getColumnClass(int col) {
 		if (col == 0 || col == 5) {
 			return Integer.class;
@@ -35,6 +35,7 @@ public class EventTableModel extends AbstractTableModel{
 	/**
 	 * @return the heading for a given column.
 	 */
+	@Override
 	public String getColumnName(int col) {
 		return _columnNames[col];
 	}

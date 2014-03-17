@@ -1,9 +1,6 @@
 package fullapp;
 
-import inputSubPanels.SpringUtilities;
-
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -13,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,14 +21,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
-import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-
-import fullapp.TeamInterviewPanel.AutonInterview.IAutonNoComment;
 	
 @SuppressWarnings("serial")
 public class TeamProfileWindow extends JPanel {
@@ -58,7 +51,8 @@ public class TeamProfileWindow extends JPanel {
 		mainPanel.add(new JLabel());
 		mainPanel.add(new JLabel());
 		mainPanel.add(new JLabel());
-//		mainPanel.add(new TotalAutonPointsGraphPanel(t));
+		mainPanel.add(new JLabel());
+		//mainPanel.add(new TotalAutonPointsGraphPanel(t));
 		
 		mainPanel.setLayout(new GridLayout(2,3));
 		add(mainPanel);
@@ -69,45 +63,6 @@ public class TeamProfileWindow extends JPanel {
 }
 
 class CommentPane extends JTabbedPane{
-	class RobotFlaws extends JScrollPane{
-		public RobotFlaws(Team t){
-			JPanel p = new JPanel();
-			for( int i = 0; i < t.getNumberOfMatchRecords(); i++){
-				JTextArea a = new JTextArea(t.getMatchRecord(i).getRobotFlaws());
-				a.setEditable(false);
-				p.add(a);
-				p.add(new JSeparator(SwingConstants.HORIZONTAL));
-			}
-			p.setLayout(new BoxLayout(p,BoxLayout.Y_AXIS));
-			setViewportView(p);
-		}
-	}
-	class AllianceComment extends JScrollPane{
-		public AllianceComment(Team t){
-			JPanel p = new JPanel();
-			for( int i = 0; i < t.getNumberOfMatchRecords(); i++){
-				JTextArea a = new JTextArea(t.getMatchRecord(i).getAllianceComment());
-				a.setEditable(false);
-				p.add(a);
-				p.add(new JSeparator(SwingConstants.HORIZONTAL));
-			}
-			p.setLayout(new BoxLayout(p,BoxLayout.Y_AXIS));
-			setViewportView(p);
-		}
-	}
-	class AutonComment extends JScrollPane{
-		public AutonComment(Team t){
-			JPanel p = new JPanel();
-			for( int i = 0; i < t.getNumberOfMatchRecords(); i++){
-				JTextArea a = new JTextArea(t.getMatchRecord(i).getAutonComment());
-				a.setEditable(false);
-				p.add(a);
-				p.add(new JSeparator(SwingConstants.HORIZONTAL));
-			}
-			p.setLayout(new BoxLayout(p,BoxLayout.Y_AXIS));
-			setViewportView(p);
-		}
-	}
 	class PenaltiesComment extends JScrollPane{
 		public PenaltiesComment(Team t){
 			JPanel p = new JPanel();
@@ -135,10 +90,6 @@ class CommentPane extends JTabbedPane{
 		}
 	}
 	public CommentPane(Team t){
-		
-		addTab("Robot Flaws",new RobotFlaws(t));
-		addTab("Alliance",new AllianceComment(t));
-		addTab("Auton",new AutonComment(t));
 		addTab("Penalties",new PenaltiesComment(t));
 		addTab("Overall",new OverallGamePlay(t));
 		
@@ -152,10 +103,9 @@ class AveragePane extends JPanel{
 		public AverageData(Team t){
 			add(new JLabel("Avg. Driver Ability"));add(new JLabel(Double.toString(t.getAverageDriverAbility())));
 			add(new JLabel("Avg. Speed"));add(new JLabel(Double.toString(t.getAverageSpeed())));
-			add(new JLabel("Avg. Maneuverability"));add(new JLabel(Double.toString(t.getAverageManeuverability())));
 			add(new JLabel("Avg. Stability"));add(new JLabel(Double.toString(t.getAverageStability())));
 			add(new JLabel("Avg. Pushing Ability"));add(new JLabel(Double.toString(t.getAveragePushingAbility())));
-			setLayout(new GridLayout(9,2));
+			setLayout(new GridLayout(8,2));
 		}
 	}
 	public AveragePane(Team t){

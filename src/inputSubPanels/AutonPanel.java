@@ -68,17 +68,6 @@ public class AutonPanel extends JPanel {
 		if(mobility) y.setSelected(true);
 		else n.setSelected(true);
 	}
-	public boolean getStartingPosition(){
-		startingAndMobility s = (startingAndMobility) getComponents()[2];
-		JRadioButton r = (JRadioButton)s.getComponents()[4];
-		return r.isSelected();
-	}
-	public void setStartingPosition(boolean startingPosition){
-		JRadioButton y = (JRadioButton)sAM.getComponent(4);
-		JRadioButton n = (JRadioButton)sAM.getComponent(5);
-		if(startingPosition) y.setSelected(true);
-		else n.setSelected(true);
-	}
 
 }
 	class ScoringPanel extends JPanel{
@@ -135,7 +124,6 @@ public class AutonPanel extends JPanel {
 		
 		public startingAndMobility(){
 			Methods.addYNBG(this, "Mobility Points", "YES", "NO");
-			Methods.addYNBG(this, "Start Zone", "WHITE", "GOALIE");
 			setLayout(new SpringLayout());
 			 SpringUtilities.makeCompactGrid(this, this.getComponentCount() / 3, 3,
 						0, 0, 0, 0);

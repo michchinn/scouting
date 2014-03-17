@@ -2,12 +2,12 @@ package fullapp;
  
 public class MatchRecord{ 
 	
-	///////////////////////
+	/*General Info*/
 	private int teamNumber;
 	private String teamName;
 	private int matchNumber;
 	private String scoutName;
-	////////////////////////
+	/*Autonomous*/
 	private int topAutonScored;
 	private int topAutonShot;
 	private int bottomAutonScored;
@@ -15,15 +15,14 @@ public class MatchRecord{
 	private int topHot;
 	private int bottomHot;
 	private boolean mobilityPoints;
-	private boolean startZone;
-	/////////////////////////
-	private int driverAbility;
+//	private boolean startZone;
+	/*Drive System*/
+	private String posistionPlayed;
 	private int speed;
-	private int maneuverability;
+	private int driverAbility;
 	private int stability;
 	private int pushingAbility;
-	private String posistionPlayed;
-	/////////////////////////
+	/*Shooting,Intake*/
 	private int topTeleopScored;
 	private int topTeleopShot;
 	private int bottomTeleopScored;
@@ -32,20 +31,20 @@ public class MatchRecord{
 	private int shootingAccuracy;
 	private int acquisitionSpeed;
 	private String acquisitionLocation;
-	//////////////////////////
-	private int possessions;
+	/*Assisting and Catching*/
+//	private int possessions;
 	private int passesComplete;
 	private int passesTotal;
 	private int trussThrowsComplete;
 	private int trussThrowsTotal;
 	private int catchesComplete;
 	private int catchesTotal;
-	//////////////////////////
+	/*Comments*/
 	private String penalties;
 	private String overallGamePlay;
-	private String robotFlaws;
-	private String allianceComment;
-	private String autonComment;
+//	private String robotFlaws;
+//	private String allianceComment;
+//	private String autonComment;
 	//////////////////////////
 	
 	public MatchRecord(){
@@ -60,10 +59,8 @@ public class MatchRecord{
 		  topHot = 0;
 		  bottomHot = 0;
 		  mobilityPoints = false;
-		  startZone = false;
 		  driverAbility = 0;
 		  speed = 0;
-		  maneuverability = 0;
 		  stability = 0;
 		  pushingAbility = 0;
 		  posistionPlayed = "";
@@ -75,7 +72,6 @@ public class MatchRecord{
 		  shootingAccuracy = 0;
 		  acquisitionSpeed = 0;
 		  acquisitionLocation = "";
-		  possessions = 0;
 		  passesComplete = 0;
 		  passesTotal = 0;
 		  trussThrowsComplete = 0;
@@ -84,24 +80,20 @@ public class MatchRecord{
 		  catchesTotal = 0;
 		  penalties = "";
 		  overallGamePlay = "";
-		  robotFlaws = "";
-		  allianceComment = "";
-		  autonComment = "";
 	}
-	
+
 	public MatchRecord(int teamNumber, String teamName, int matchNumber,
 			String scoutName, int topAutonScored, int topAutonShot,
 			int bottomAutonScored, int bottomAutonShot, int topHot,
-			int bottomHot, boolean mobilityPoints, boolean startZone,
-			int driverAbility, int speed, int maneuverability, int stability,
-			int pushingAbility, String posistionPlayed, int topTeleopScored,
-			int topTeleopShot, int bottomTeleopScored, int bottomTeleopShot,
-			int shootingSpeed, int shootingAccuracy, int acquisitionSpeed,
-			String acquisitionLocation, int possessions, int passesComplete,
-			int passesTotal, int trussThrowsComplete, int trussThrowsTotal,
-			int catchesComplete, int catchesTotal, String penalties,
-			String overallGamePlay, String robotFlaws, String allianceComment,
-			String autonComment) {
+			int bottomHot, boolean mobilityPoints, String posistionPlayed,
+			int speed, int driverAbility, int stability, int pushingAbility,
+			int topTeleopScored, int topTeleopShot, int bottomTeleopScored,
+			int bottomTeleopShot, int shootingSpeed, int shootingAccuracy,
+			int acquisitionSpeed, String acquisitionLocation,
+			int passesComplete, int passesTotal, int trussThrowsComplete,
+			int trussThrowsTotal, int catchesComplete, int catchesTotal,
+			String penalties, String overallGamePlay) {
+		super();
 		this.teamNumber = teamNumber;
 		this.teamName = teamName;
 		this.matchNumber = matchNumber;
@@ -113,13 +105,11 @@ public class MatchRecord{
 		this.topHot = topHot;
 		this.bottomHot = bottomHot;
 		this.mobilityPoints = mobilityPoints;
-		this.startZone = startZone;
-		this.driverAbility = driverAbility;
+		this.posistionPlayed = posistionPlayed;
 		this.speed = speed;
-		this.maneuverability = maneuverability;
+		this.driverAbility = driverAbility;
 		this.stability = stability;
 		this.pushingAbility = pushingAbility;
-		this.posistionPlayed = posistionPlayed;
 		this.topTeleopScored = topTeleopScored;
 		this.topTeleopShot = topTeleopShot;
 		this.bottomTeleopScored = bottomTeleopScored;
@@ -128,7 +118,6 @@ public class MatchRecord{
 		this.shootingAccuracy = shootingAccuracy;
 		this.acquisitionSpeed = acquisitionSpeed;
 		this.acquisitionLocation = acquisitionLocation;
-		this.possessions = possessions;
 		this.passesComplete = passesComplete;
 		this.passesTotal = passesTotal;
 		this.trussThrowsComplete = trussThrowsComplete;
@@ -137,9 +126,6 @@ public class MatchRecord{
 		this.catchesTotal = catchesTotal;
 		this.penalties = penalties;
 		this.overallGamePlay = overallGamePlay;
-		this.robotFlaws = robotFlaws;
-		this.allianceComment = allianceComment;
-		this.autonComment = autonComment;
 	}
 
 	public int getTeamNumber() {
@@ -230,20 +216,12 @@ public class MatchRecord{
 		this.mobilityPoints = mobilityPoints;
 	}
 
-	public boolean isStartZone() {
-		return startZone;
+	public String getPosistionPlayed() {
+		return posistionPlayed;
 	}
 
-	public void setStartZone(boolean startZone) {
-		this.startZone = startZone;
-	}
-
-	public int getDriverAbility() {
-		return driverAbility;
-	}
-
-	public void setDriverAbility(int driverAbility) {
-		this.driverAbility = driverAbility;
+	public void setPosistionPlayed(String posistionPlayed) {
+		this.posistionPlayed = posistionPlayed;
 	}
 
 	public int getSpeed() {
@@ -254,12 +232,12 @@ public class MatchRecord{
 		this.speed = speed;
 	}
 
-	public int getManeuverability() {
-		return maneuverability;
+	public int getDriverAbility() {
+		return driverAbility;
 	}
 
-	public void setManeuverability(int maneuverability) {
-		this.maneuverability = maneuverability;
+	public void setDriverAbility(int driverAbility) {
+		this.driverAbility = driverAbility;
 	}
 
 	public int getStability() {
@@ -276,14 +254,6 @@ public class MatchRecord{
 
 	public void setPushingAbility(int pushingAbility) {
 		this.pushingAbility = pushingAbility;
-	}
-
-	public String getPosistionPlayed() {
-		return posistionPlayed;
-	}
-
-	public void setPosistionPlayed(String posistionPlayed) {
-		this.posistionPlayed = posistionPlayed;
 	}
 
 	public int getTopTeleopScored() {
@@ -350,14 +320,6 @@ public class MatchRecord{
 		this.acquisitionLocation = acquisitionLocation;
 	}
 
-	public int getPossessions() {
-		return possessions;
-	}
-
-	public void setPossessions(int possessions) {
-		this.possessions = possessions;
-	}
-
 	public int getPassesComplete() {
 		return passesComplete;
 	}
@@ -422,30 +384,6 @@ public class MatchRecord{
 		this.overallGamePlay = overallGamePlay;
 	}
 
-	public String getRobotFlaws() {
-		return robotFlaws;
-	}
-
-	public void setRobotFlaws(String robotFlaws) {
-		this.robotFlaws = robotFlaws;
-	}
-
-	public String getAllianceComment() {
-		return allianceComment;
-	}
-
-	public void setAllianceComment(String allianceComment) {
-		this.allianceComment = allianceComment;
-	}
-
-	public String getAutonComment() {
-		return autonComment;
-	}
-
-	public void setAutonComment(String autonComment) {
-		this.autonComment = autonComment;
-	}
-
 	public int getAutonPoints(){
 			int autonPoints = 0;
 			
@@ -465,7 +403,6 @@ public class MatchRecord{
 		teleopPoints += this.getTopTeleopScored() * 10;
 		teleopPoints += this.getBottomTeleopScored();
 		teleopPoints += this.getTrussThrowsComplete() * 10;
-//		teleopPoints += this.getPassesComplete() * 10;
 		teleopPoints += this.getCatchesComplete() * 10;
 		
 		return teleopPoints;
@@ -480,14 +417,11 @@ public class MatchRecord{
 	}
 	public double getTopShootingPercentage(){
 		double avg = 0.0;
-//		System.out.println(this.getTopTeleopScored() + " " + this.getTopTeleopShot() + " " + (double)this.getTopTeleopScored()/this.getTopTeleopShot());
 		try{
 			avg += ((double)this.getTopTeleopScored())/(this.getTopTeleopShot());
-//			System.out.println(avg);
 		}
 		catch(ArithmeticException e){
 			e.printStackTrace();
-//			System.out.println("CAUGHT");
 		}
 		return avg;
 	}

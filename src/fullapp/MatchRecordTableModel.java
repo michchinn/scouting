@@ -1,10 +1,9 @@
 package fullapp;
 
 import javax.swing.table.AbstractTableModel;
-import java.util.Vector;
 
 public class MatchRecordTableModel extends AbstractTableModel{
-	private String[] _columnNames = {"Match #","Auton. High","Auton. Hot High","Auton. Score", "# Teleop High","# Teleop Low","Teleop Top Acc.", "Catches", "Trusses","Teleop Score","Possessions", "Play Style","Scout Name"};
+	private String[] _columnNames = {"Match #","Auton. High","Auton. Hot High","Auton. Score", "# Teleop High","# Teleop Low","Teleop Top Acc.", "Catches", "Trusses","Teleop Score", "Play Style","Scout Name"};
 	private Team _team;
 
 	public Object getValueAt(int row, int col) {
@@ -20,14 +19,14 @@ public class MatchRecordTableModel extends AbstractTableModel{
 			case 6: return record.getTopShootingPercentage();
 			case 7: return record.getCatchesComplete();
 			case 8: return record.getTrussThrowsComplete();
-			case 9: return record.getTeleopPoints();
-			case 10: return record.getPossessions();			
-			case 11: return record.getPosistionPlayed();
-			case 12: return record.getScoutName();
+			case 9: return record.getTeleopPoints();			
+			case 10: return record.getPosistionPlayed();
+			case 11: return record.getScoutName();
 		}
 		return null;
 	}
 	
+	@Override
 	public Class<?> getColumnClass(int col) {
 		return Integer.class;
 	}
@@ -49,6 +48,7 @@ public class MatchRecordTableModel extends AbstractTableModel{
 	/**
 	 * @return the heading for a given column.
 	 */
+	@Override
 	public String getColumnName(int col) {
 		return _columnNames[col];
 	}

@@ -138,7 +138,7 @@ public class EventOverviewWindow extends JFrame {
 		daisyLightBlue = Color.getHSBColor(floats[0], floats[1], floats[2]);
 		
 		pathToData = System.getProperty("user.home") + "/Desktop/FRCData";
-		_currentEvent = new Event("Hatboro-Horsham FIRST Robotics District Competition","PAHAT",142);
+		_currentEvent = new Event("Lenape-Seneca District","NJLEN",15);
 		
 		_eventTableModel = new EventTableModel();
 		_eventTable = new JTable(_eventTableModel);
@@ -148,6 +148,7 @@ public class EventOverviewWindow extends JFrame {
 		_eventTable.setShowHorizontalLines(true);
 		_eventTable.getSelectionModel().addListSelectionListener(new EventTableSelectionListener());
 		_eventTable.addMouseListener(new MouseAdapter() {
+			@Override
 			public void mouseClicked(MouseEvent e) {
 				TabbedProfileWindow window = new TabbedProfileWindow(_currentTeam, _currentEvent);
 				if (e.getClickCount() == 2) {

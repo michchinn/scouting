@@ -39,7 +39,6 @@ public class TeamInterviewPanel extends JPanel {
 		private DriveSystem drivePanel;
 		private ShootPanel shootPanel;
 		private AcquireBalls acquireBallPanel;
-		private Comments gameStrategyPanel;
 		
 		public MainInterviewPanel(Team t, Event e){
 					
@@ -49,17 +48,16 @@ public class TeamInterviewPanel extends JPanel {
 			drivePanel = new DriveSystem();
 			shootPanel = new ShootPanel();		
 			acquireBallPanel = new AcquireBalls();
-			gameStrategyPanel = new Comments();
 			
 			add(drivePanel);
 			add(m_autonPanel);
 			add(m_photoPanel);
 			add(shootPanel);
 			add(acquireBallPanel);
-			add(gameStrategyPanel);
 			
 			
 			setLayout(new GridLayout(2,3));
+			//this.setMaximumSize(new Dimension(this.getSize().width-200,this.getSize().height-100));
 		}
 	}
 	class ShootPanel extends JPanel{
@@ -67,7 +65,7 @@ public class TeamInterviewPanel extends JPanel {
 			public ShootData(){
 				add(new JLabel("Shooter Type:"));add(new JLabel(_interview.getShooterType()));
 				add(new JLabel("Can Make Truss Shots:         "));
-				if(_interview.isCanMakeTrussShots()){add(new JLabel("Yes"));}else{add(new JLabel("Yes"));}
+				if(_interview.getCanMakeTrussShots()){add(new JLabel("Yes"));}else{add(new JLabel("Yes"));}
 				add(new JLabel("Goals:"));add(new JLabel(_interview.getGeneralGoals()));
 				setLayout(new SpringLayout());
 				SpringUtilities.makeCompactGrid(this, 3, 2, 0, 0, 0, 0);
@@ -118,19 +116,19 @@ public class TeamInterviewPanel extends JPanel {
 	class Comments extends JPanel{
 		class CommentData extends JPanel{
 			public CommentData(){
-				JTextArea a = new JTextArea(_interview.getAutonComment());
-				JTextArea g = new JTextArea(_interview.getGeneralComment());
+//				JTextArea a = new JTextArea(_interview.getAutonComment());
+//				JTextArea g = new JTextArea(_interview.getGeneralComment());
 				
-				a.setEditable(false);
-				g.setEditable(false);
+//				a.setEditable(false);
+//				g.setEditable(false);
 				
-				add(new JLabel("Autonomous Comment"));
-				add(new JSeparator(SwingConstants.HORIZONTAL));	
-				add(a);
+//				add(new JLabel("Autonomous Comment"));
+//				add(new JSeparator(SwingConstants.HORIZONTAL));	
+//				add(a);
 
-				add(new JLabel("General Comment"));
-				add(new JSeparator(SwingConstants.HORIZONTAL));
-				add(g);
+//				add(new JLabel("General Comment"));
+//				add(new JSeparator(SwingConstants.HORIZONTAL));
+//				add(g);
 				
 				setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 			}
@@ -156,7 +154,7 @@ public class TeamInterviewPanel extends JPanel {
 			
 			public IAutonNoComment(){
 				if( _interview != null ){
-					add(new JLabel("Has an autonomous:"));if(_interview.isHasAuton()){add(new JLabel("Yes"));}else{add(new JLabel("No"));}
+//					add(new JLabel("Has an autonomous:"));if(_interview.isHasAuton()){add(new JLabel("Yes"));}else{add(new JLabel("No"));}
 				
 					add(new JLabel("Starting Position:"));
 					add(new JLabel(_interview.getAutonStartingPos()));
@@ -165,13 +163,13 @@ public class TeamInterviewPanel extends JPanel {
 					add(new JLabel(_interview.getAutonGoals()));
 					
 					add(new JLabel("Target hot goal:"));
-					if(_interview.isTargetHotGoal()) { add(new JLabel("Yes")); }else{ add(new JLabel("No"));}
+					if(_interview.getTargetHotGoal()) { add(new JLabel("Yes")); }else{ add(new JLabel("No"));}
 
 					add(new JLabel("Number of balls scored:            "));
 					add(new JLabel(_interview.getAutonBallCount() + " balls"));
 					}
 				setLayout(new SpringLayout());
-				SpringUtilities.makeCompactGrid(this, 5, 2, 0, 0, 0, 0);
+				SpringUtilities.makeCompactGrid(this, 4, 2, 0, 0, 0, 0);
 				}
 		}
 		public AutonInterview(){
@@ -196,16 +194,14 @@ public class TeamInterviewPanel extends JPanel {
 		class DSdata extends JPanel{
 			public DSdata(){
 				if( _interview != null ){
-					add(new JLabel("Width:"));add(new JLabel(Integer.toString(_interview.getWidth())));
-					add(new JLabel("Length:"));add(new JLabel(Integer.toString(_interview.getLength())));
-					add(new JLabel("Weight:"));add(new JLabel(Integer.toString(_interview.getWeight())));
+					add(new JLabel("Orientation:"));add(new JLabel((_interview.getOrientation())));
+					add(new JLabel("Weight:"));add(new JLabel(Double.toString(_interview.getWeight())));
 					add(new JLabel("# of Drive Wheels:"));add(new JLabel(Integer.toString(_interview.getNumberOfWheels())));
-					add(new JLabel("Speed:"));add(new JLabel(_interview.getSpeed()));
 					add(new JLabel("Drive System:"));add(new JLabel(_interview.getDriveSystem()));
 					add(new JLabel("Drop Center Wheels:        "));add(new JLabel(_interview.getHasDropCenterWheels()));
 					
 					setLayout(new SpringLayout());
-					SpringUtilities.makeCompactGrid(this, 7, 2, 0, 0, 0, 0);
+					SpringUtilities.makeCompactGrid(this, 5, 2, 0, 0, 0, 0);
 				}
 				setBackground(null);
 
@@ -282,9 +278,3 @@ class PhotoPanel extends JPanel{
 		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 	}
 }
-
-
-
-
-
-

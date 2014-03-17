@@ -15,6 +15,7 @@ public class TotalTeleopPointsGraphPanel extends GraphPanel {
 		setName("Teleoperated");
 	}
 	
+	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		

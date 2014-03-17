@@ -1,7 +1,5 @@
 package fullapp;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -15,6 +15,7 @@ public class TotalAutonPointsGraphPanel extends GraphPanel {
 		setName("Autonomous");
 	}
 	
+	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		

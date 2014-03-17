@@ -75,7 +75,7 @@ public class MatchRecordDialog extends JDialog{
         leftPanel.add(new JSeparator(SwingConstants.HORIZONTAL));
         leftPanel.add(m_assistPanel);
         
-        rightPanel.add(m_commentPanel);
+        leftPanel.add(m_commentPanel);
         
         leftPanel.setLayout(new BoxLayout(leftPanel,BoxLayout.Y_AXIS));
         rightPanel.setLayout(new BoxLayout(rightPanel,BoxLayout.Y_AXIS));
@@ -95,19 +95,9 @@ public class MatchRecordDialog extends JDialog{
 				}
 			}	
         });
-        JButton saveToFile = new JButton("Save to File");
-        saveToFile.addActionListener(new ActionListener(){
-
-			public void actionPerformed(ActionEvent arg0) {
-				MatchRecord r = getMatchRecord();
-				try{Methods.saveMATCHToFile(r);}
-				catch(IOException ex){}
-				dispose();
-			}
-        	
-        });
+      
         bodyPanel.add( new JSeparator(SwingConstants.HORIZONTAL));
-        bodyPanel.add(submitRecord);bodyPanel.add(saveToFile);
+        bodyPanel.add(submitRecord);
  
         bodyPanel.setLayout(new BoxLayout(bodyPanel,BoxLayout.X_AXIS));
         
@@ -129,10 +119,10 @@ public class MatchRecordDialog extends JDialog{
         //add(fullPanel);
         fullPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
-        setPreferredSize(new Dimension(800,700));
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        //setPreferredSize(new Dimension(800,700));
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
-        setResizable(false);
+        //setResizable(false);
         pack();
     }
    
@@ -150,11 +140,9 @@ public class MatchRecordDialog extends JDialog{
 			int topHot = m_autonPanel.getTopHot();
 			int bottomHot = m_autonPanel.getBottomHot();
 			boolean mobilityPoints = m_autonPanel.getMobility();
-			boolean startZone = m_autonPanel.getStartingPosition();
 			//////////////////////////////////////////////
 			int driverAbility = m_generalInfoPanel.getDriverAbility();
 			int speed = m_generalInfoPanel.getSpeed();
-			int maneuverability = m_generalInfoPanel.getManeuverability();
 			int stability = m_generalInfoPanel.getStability();
 			int pushingAbility = m_generalInfoPanel.getPushingAbility();
 			String positionPlayed = m_generalInfoPanel.getPosition();
@@ -168,7 +156,6 @@ public class MatchRecordDialog extends JDialog{
 			int acquisitionSpeed = m_teleopPanel.getAcquisitionSpeed();
 			String acquisitionLocation = m_teleopPanel.getAcquistionLocation();
 			//////////////////////////////////////////////
-			int possessions = m_assistPanel.getPossessions();
 			int passesComplete = m_assistPanel.getPassesComplete();
 			int passesTotal = m_assistPanel.getPassesTotal();
 			int trussThrowsComplete = m_assistPanel.getTrussThrowsComplete();
@@ -178,23 +165,18 @@ public class MatchRecordDialog extends JDialog{
 			//////////////////////////////////////////
 			String penalties = m_commentPanel.getPenalties();
 			String overallGamePlay = m_commentPanel.getOverallGamePlay();
-			String robotFlaws = m_commentPanel.getRobotFlaws();
-			String allianceComment = m_commentPanel.getAllianceComment();
-			String autonComment = m_commentPanel.getAutoNotes();
-			
+		
 			return new MatchRecord(teamNumber,teamName,matchNumber,
 					scoutName,topAutonScored,topAutonShot,
 					bottomAutonScored,bottomAutonShot,topHot,
-					bottomHot,mobilityPoints,startZone,
-					driverAbility,speed,maneuverability,stability,
-					pushingAbility,positionPlayed,topTeleopScored,
-					topTeleopShot,bottomTeleopScored,bottomTeleopShot,
-					shootingSpeed,shootingAccuracy,acquisitionSpeed,
-					acquisitionLocation,possessions,passesComplete,
-					passesTotal,trussThrowsComplete,trussThrowsTotal,
-					catchesComplete,catchesTotal,penalties,
-					overallGamePlay,robotFlaws,allianceComment,
-					autonComment);
+					bottomHot,mobilityPoints,positionPlayed,
+					speed,driverAbility,stability,pushingAbility,
+					topTeleopScored,topTeleopShot,bottomTeleopScored,
+					bottomTeleopShot,shootingSpeed,shootingAccuracy,
+					acquisitionSpeed,acquisitionLocation,
+					passesComplete,passesTotal,trussThrowsComplete,
+					trussThrowsTotal,catchesComplete,catchesTotal,
+					penalties,overallGamePlay);
     }
     public void setMatchRecord(MatchRecord r){
     	m_setUpPanel.setTeamNumber(r.getTeamNumber());
@@ -209,11 +191,9 @@ public class MatchRecordDialog extends JDialog{
 		m_autonPanel.setTopHot(r.getTopHot());
 		m_autonPanel.setBottomHot(r.getBottomHot());
 		m_autonPanel.setMobility(r.isMobilityPoints());
-		m_autonPanel.setStartingPosition(r.isStartZone());
 		
 		m_generalInfoPanel.setDriverAbility(r.getDriverAbility());
 		m_generalInfoPanel.setSpeed(r.getSpeed());
-		m_generalInfoPanel.setManeuverability(r.getManeuverability());
 		m_generalInfoPanel.setStability(r.getStability());
 		m_generalInfoPanel.setPushingAbility(r.getPushingAbility());
 		m_generalInfoPanel.setPosition(r.getPosistionPlayed());
@@ -227,7 +207,6 @@ public class MatchRecordDialog extends JDialog{
 		m_teleopPanel.setAcquisitionSpeed(r.getAcquisitionSpeed());
 		m_teleopPanel.setAcquisitionLocation(r.getAcquisitionLocation());
 		
-		m_assistPanel.setPossessions(r.getPossessions());
 		m_assistPanel.setPassesComplete(r.getPassesComplete());
 		m_assistPanel.setPassesTotal(r.getPassesTotal());
 		m_assistPanel.setTrussThrowsComplete(r.getTrussThrowsComplete());
@@ -237,9 +216,6 @@ public class MatchRecordDialog extends JDialog{
 		
 		m_commentPanel.setPenalties(r.getPenalties());
 		m_commentPanel.setOverallGamePlay(r.getOverallGamePlay());
-		m_commentPanel.setRobotFlaws(r.getRobotFlaws());
-		m_commentPanel.setAllianceComment(r.getAllianceComment());
-		m_commentPanel.setAutoNotes(r.getAutonComment());
     }
     public void setTeamNumber(int teamNumber){
     	m_setUpPanel.setTeamNumber(teamNumber);
